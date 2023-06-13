@@ -5,6 +5,7 @@ module.exports = {
         extend: {
             fontFamily: {
                 jua: ["'Jua', sans-serif"],
+                gb: ["'Gowun Batang', serif;"],
             },
         },
     },
