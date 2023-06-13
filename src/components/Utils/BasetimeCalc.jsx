@@ -8,6 +8,8 @@ function BasetimeCalc(baseTime) {
         else if (timeArr[i] <= baseTime * 1 && timeArr[i + 1] > baseTime * 1) {
             baseTime = timeArr[i];
             break;
+        } else if (baseTime < 2) {
+            baseTime = timeArr[timeArr.length - 1];
         }
     }
     return baseTime;
