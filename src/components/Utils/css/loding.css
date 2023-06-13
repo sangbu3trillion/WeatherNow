@@ -7,11 +7,11 @@ p:before {
     height: 100px;
     content: '   ';
     color: rgb(247, 251, 255);
-    animation-name: example;
-    animation-duration: 4s;
+    animation-name: loding;
+    animation-duration: 3s;
     margin-right: 15px;
 }
-@keyframes example {
+@keyframes loding {
     25% {
         content: '오늘';
         color: rgb(221, 237, 252);

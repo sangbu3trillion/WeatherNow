@@ -36,16 +36,15 @@ const Clock = () => {
 
     return (
         <>
-            <style>@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');</style>
-
-            <div className="w-4/5 m-auto flex justify-center mb-5 font-bold text-lg ">
-                <p className="font-jua">{`${month}/${date}/${days[day]}`} </p>
-            </div>
-            <div className=" flex justify-center">
-                <p className="font-jua">
-                    {`${(hour < 12 ? 'A' : 'P') + 'M' + ' ' + (hour % 12 || 12)} : ${minute}
-                `}
-                </p>
+            <div className="border-2 p-5 w-60 rounded-md">
+                <div className="text-center">
+                    <p className="font-gb font-bold">{`${month}/${date}/${days[day]}`} </p>
+                </div>
+                <div className="text-center">
+                    <p className="font-gb">{`${
+                        (hour < 12 ? 'A' : 'P') + 'M' + ' ' + (hour % 12 || 12)
+                    } : ${minute}`}</p>
+                </div>
             </div>
         </>
     );
