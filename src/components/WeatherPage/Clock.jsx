@@ -36,10 +36,16 @@ const Clock = () => {
 
     return (
         <>
-            <div>
-                시간 :
-                {`${year}/${month}/${date}/${days[day]} 
-    ${(hour < 12 ? 'A' : 'P') + 'M' + ' ' + (hour % 12 || 12)} : ${minute}`}
+            <style>@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');</style>
+
+            <div className="w-4/5 m-auto flex justify-center mb-5 font-bold text-lg ">
+                <p className="font-jua">{`${month}/${date}/${days[day]}`} </p>
+            </div>
+            <div className=" flex justify-center">
+                <p className="font-jua">
+                    {`${(hour < 12 ? 'A' : 'P') + 'M' + ' ' + (hour % 12 || 12)} : ${minute}
+                `}
+                </p>
             </div>
         </>
     );
