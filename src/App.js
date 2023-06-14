@@ -1,5 +1,11 @@
+import WeatherInfo from './components/WeatherPage/WeatherInfo';
+
 function App() {
-    return <h1 className="text-3xl font-bold underline">Hello world!</h1>;
+    return (
+        <div>
+            <WeatherInfo />
+        </div>
+    );
 }
 
 export default App;
