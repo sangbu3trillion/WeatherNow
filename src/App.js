@@ -1,10 +1,10 @@
-import KakaoMap from './components/WeatherPage/KakaoMap';
+import WeatherInfo from './components/WeatherPage/WeatherInfo';
 
 function App() {
     return (
-        <>
-            <KakaoMap />
-        </>
+        <div>
+            <WeatherInfo />
+        </div>
     );
 }
 
