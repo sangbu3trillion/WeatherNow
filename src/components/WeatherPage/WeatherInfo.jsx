@@ -32,11 +32,11 @@ const WeatherInfo = () => {
         function success(pos) {
             const x = pos.coords.latitude;
             const y = pos.coords.longitude;
-            setBaseTime_vilage(BasetimeCalc(hour));
+            setBaseTime_vilage(BasetimeCalc(hour).baseTime);
             setBaseTime_ultra(hour < 10 ? '0' + hour : hour);
 
             setBaseDate_vilage(
-                hour < 2
+                BasetimeCalc(hour).flag
                     ? year.toString() + month.toString() + (date - 1).toString()
                     : year.toString() + month.toString() + date.toString(),
             );
@@ -54,6 +54,29 @@ const WeatherInfo = () => {
     useEffect(() => {
         init();
     }, []);
+    // async function fechDate() {
+    //     const res = await axios.get('/1360000/VilageFcstInfoService_2.0/getVilageFcst', {
+    //         params: {
+    //             serviceKey: 'c0ThfABkN/fAsmZROXef62eRVKB+yqalaUdIY9JGtNTDm+NqMwt52rHbVMAJIbe3DoZQN/mA/siPgjowhnGSnA==',
+    //             numOfRows: 500,
+    //             pageNo: 1,
+    //             base_date: baseDate_vilage,
+    //             base_time: baseTime_vilage + '00',
+    //             nx: Math.floor(rs.x),
+    //             ny: Math.floor(rs.y),
+    //             dataType: 'JSON',
+    //         },
+    //     });
+    //     const filteredWeather = res.data.response.body.items.item.filter(
+    //         item =>
+    //             item.category === 'SKY' ||
+    //             item.category === 'PTY' ||
+    //             item.category === 'TMN' ||
+    //             item.category === 'TMX' ||
+    //             item.category === 'REH',
+    //     );
+    //     // const res1=await axios.get
+    // }
 
     // 동네예보 axios START
     useEffect(() => {
@@ -131,7 +154,7 @@ const WeatherInfo = () => {
     console.log('------ultra', weather_ultra_cur_reh);
 
     return (
-        <>
+        <div id="wrap">
             <div className="current_temp_and_img">
                 {weather_ultra_cur_temp ? (
                     <li>{weather_ultra_cur_temp[0].fcstValue}°</li>
@@ -174,7 +197,7 @@ const WeatherInfo = () => {
                     <p>Loading weather data...</p>
                 )}
             </div>
-        </>
+        </div>
     );
 };
 
