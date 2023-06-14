@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <<<<<<< refs/remotes/origin/dev
 import WeatherInfo from './components/WeatherPage/WeatherInfo';
 
@@ -7,6 +8,8 @@ function App() {
             <WeatherInfo />
         </div>
 =======
+=======
+>>>>>>> Clock_feature
 <<<<<<< Updated upstream
 import KakaoMap from './components/WeatherPage/KakaoMap';
 
@@ -25,7 +28,10 @@ function App() {
             <PlayList />
         </div>
 >>>>>>> Stashed changes
+<<<<<<< HEAD
 >>>>>>> Auto stash before merge of "Clock_feature" and "origin/Clock_feature"
+=======
+>>>>>>> Clock_feature
     );
 }
 
