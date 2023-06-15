@@ -5,7 +5,6 @@ function BasetimeCalc(baseTime) {
         baseTime = 23;
         return baseTime;
     }
-    console.log(typeof baseTime);
 
     for (let i = 0; i < timeArr.length; i++) {
         console.log(baseTime, ':', timeArr[i]);
