@@ -2,33 +2,7 @@ import axios from 'axios';
 import React, {useEffect, useState} from 'react';
 import {dfs_xy_conv} from '../Utils/XYtranselate';
 import BasetimeCalc from '../Utils/BasetimeCalc';
-import {LineElement} from 'chart.js';
-const data = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-    datasets: [
-        {
-            type: 'line',
-            label: 'Dataset 1',
-            borderColor: 'rgb(54, 162, 235)',
-            borderWidth: 2,
-            data: [1, 2, 3, 4, 5],
-        },
-        {
-            type: 'bar',
-            label: 'Dataset 2',
-            backgroundColor: 'rgb(255, 99, 132)',
-            data: [1, 2, 3, 4, 5, 6],
-            borderColor: 'red',
-            borderWidth: 2,
-        },
-        {
-            type: 'bar',
-            label: 'Dataset 3',
-            backgroundColor: 'rgb(75, 192, 192)',
-            data: [1, 2, 3, 4, 5, 6],
-        },
-    ],
-};
+
 export default function DailyList() {
     const [x, setX] = useState(null);
     const [y, setY] = useState(null);
@@ -63,11 +37,6 @@ export default function DailyList() {
 
         setWeather(cur => res.data.response.body.items.item);
         setIsLoaded(true);
-        // .then(res => {
-
-        //     console.log(res);
-        // })
-        // .catch(err => console.log(err));
     }
 
     function init() {
@@ -109,10 +78,10 @@ export default function DailyList() {
     }, [baseTime, x, y]);
 
     return (
-        <div className="flex items-center justify-center h-screen m-auto">
-            <div className="flex flex-col justify-between w-2/6 p-6 border-2 border-solid shadow-md rounded-xl h-96">
+        <div className="flex items-center justify-center h-screen m-auto ">
+            <div className="flex flex-col justify-between w-2/6 p-6 overflow-x-scroll border-2 border-solid shadow-md rounded-xl h-96 scrollbar-track-white scrollbar-thumb-blue-300 scrollbar-thumb-rounded-lg scrollbar-thin ">
                 {isLoaded && (
-                    <div className="flex overflow-hidden">
+                    <div className="flex ">
                         {weather.map(
                             e =>
                                 e.category === 'TMP' &&
@@ -123,9 +92,9 @@ export default function DailyList() {
                         )}
                     </div>
                 )}
-                <div className="flex">{/* <LineElement type="line" data={data} /> */}</div>
+
                 {isLoaded && (
-                    <div className="flex overflow-hidden">
+                    <div className="flex scrollbar scrollbar-track-orange-500 scrollbar-thumb-slate-400">
                         {weather.map(
                             e =>
                                 e.category === 'TMP' &&
