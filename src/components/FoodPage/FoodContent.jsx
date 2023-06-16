@@ -22,7 +22,7 @@ const FoodContent = () => {
 
             setUsers(response.data);
 
-            const weatherMenu = response.data.getFoodKr.item.filter(item => item.RPRSNTV_MENU.includes('흰밀복수육'));
+            const weatherMenu = response.data.item.filter(item => item.RPRSNTV_MENU.includes('수육'));
             const foodList = weatherMenu.map(item => ({
                 title: item.MAIN_TITLE,
                 addr: item.ADDR1,
@@ -54,11 +54,12 @@ const FoodContent = () => {
     if (users === null) {
         return null;
     }
+
     return (
         <div className=" flex justify-center my-5">
             <div className="mx-20 w-3/4 h-96 border rounded-lg border-slate-200">
                 <div className="flex">
-                    <StorePicture />
+                    <StorePicture info={info} />
                     <StoreBasicInfo info={info} />
                 </div>
                 <StoreDetailInfo info={info} />
