@@ -10,19 +10,18 @@ const FoodContent = () => {
     const [error, setError] = useState(null);
     const [info, setInfo] = useState(null);
 
-    const fetchUsers = async () => {
+    const fetchUsers = async props => {
         setError(null);
         setUsers(null);
         setLoading(true);
-
+        console.log(props);
         try {
             const response = await axios.get(
                 'http://apis.data.go.kr/6260000/FoodService/getFoodKr?serviceKey=GSRcCYZGeievH8r6AdKyjzKx5dDFhx9Uyh9X9ieoqWEwe1alFjjcRtG5KiLxH7Ur313ypnBOPtpPD%2FR9m2hn0A%3D%3D&numOfRows=100&pageNo=1&resultType=json',
             );
-
             setUsers(response.data);
 
-            const weatherMenu = response.data.item.filter(item => item.RPRSNTV_MENU.includes('수육'));
+            const weatherMenu = response.data.getFoodKr.item.filter(item => item.RPRSNTV_MENU.includes('수육'));
             const foodList = weatherMenu.map(item => ({
                 title: item.MAIN_TITLE,
                 addr: item.ADDR1,
