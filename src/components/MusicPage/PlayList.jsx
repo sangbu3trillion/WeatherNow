@@ -7,9 +7,9 @@ export default function PlayList() {
     const [getList, setGetList] = useState([]);
     const [playlist, setPlaylist] = useState([]);
 
-    const CLIENT_ID = '98268ab8f48f4177a7976f4d2b8a966b';
-    const REDIRECT_URI = 'http://localhost:3000';
-    const AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize';
+    const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
+    const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI;
+    const AUTH_ENDPOINT = process.env.REACT_APP_AUTH_ENDPOINT;
     const RESPONSE_TYPE = 'token';
 
     //login, logout
@@ -63,6 +63,7 @@ export default function PlayList() {
     const logout = () => {
         setToken('');
         window.localStorage.removeItem('token');
+        setPlaylist([]);
     };
 
     const searchMusic = async e => {
@@ -85,22 +86,24 @@ export default function PlayList() {
     const renderMusic = () => {
         return playlist.map(track => (
             <div key={track.album.id}>
-                <li className="bg-white shadow-lg rounded-lg p-4 grid grid-cols-4 gap-4 cursor-pointer hover:bg-gray-50">
-                    <div>
-                        {track.album.images.length ? (
-                            <img width={'50px'} src={track.album.images[0].url} alt="앨범커버" />
-                        ) : (
-                            <div>No Image</div>
-                        )}
-                    </div>
-                    <div className="mx-5">
-                        <h2 className="text-xl font-bold mb-2">{track.album.name}</h2>
-                        <p className="text-gray-500">{track.album.artists[0].name}</p>
-                    </div>
-                    <div className="mx-20 my-auto">
-                        <button className="bg-gray-200 fas fa-play text-white hover:bg-gray-300 hover:text-black font-bold py-2 px-4 rounded"></button>
-                    </div>
-                </li>
+                <ul>
+                    <li className="bg-white shadow-lg rounded-lg p-4 cursor-pointer hover:bg-gray-50 grid grid-cols-5">
+                        <div className="col-start-1 col-end-1 grid place-items-center">
+                            {track.album.images.length ? (
+                                <img width={'50%'} src={track.album.images[0].url} alt="앨범커버" />
+                            ) : (
+                                <div>No Image</div>
+                            )}
+                        </div>
+                        <div className="ml-10  w-96">
+                            <h2 className="text-2xl font-bold mb-2">{track.album.name}</h2>
+                            <p className="text-xl text-gray-500">{track.album.artists[0].name}</p>
+                        </div>
+                        {/* <div className="mx-20 my-auto">
+                            <button className="bg-gray-200 fas fa-play text-white hover:bg-gray-300 hover:text-black font-bold py-2 px-4 rounded"></button>
+                        </div> */}
+                    </li>
+                </ul>
             </div>
         ));
     };
