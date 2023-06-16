@@ -3,7 +3,7 @@ a > span:nth-child(2) > span {
     justify-content: center;
     align-items: center;
     margin-left: 20px;
-    margin-top: -38px;
+    margin-top: -43px;
 }
 
 a > span:nth-child(2) > span > span > span {
