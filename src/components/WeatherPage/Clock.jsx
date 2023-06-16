@@ -36,7 +36,7 @@ const Clock = () => {
 
     return (
         <>
-            <div className="border-2 p-5 w-60 rounded-md">
+            <div className="border-2 p-5 w-50 rounded-md">
                 <div className="text-center">
                     <p className="font-gb font-bold">{`${month}/${date}/${days[day]}`} </p>
                 </div>
