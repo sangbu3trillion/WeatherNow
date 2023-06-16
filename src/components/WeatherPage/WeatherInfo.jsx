@@ -5,6 +5,7 @@ import BasetimeCalc from '../Utils/BasetimeCalc';
 import Sunny from '../imgs/icons8-태양.gif';
 import Cloud from '../imgs/icons8-부분적으로-흐린-날 (1).gif';
 import Cloud_many from '../imgs/icons8-비.gif';
+import Clock from './Clock';
 
 const WeatherInfo = () => {
     const [x, setX] = useState(null);
@@ -154,32 +155,32 @@ const WeatherInfo = () => {
     console.log('------ultra', weather_ultra_cur_reh);
 
     return (
-        <div id="wrap">
-            <div className="current_temp_and_img">
+        <div className="border-solid border-2 rounded-xl w-56 shadow-lg p-6">
+            <div className="current_temp_and_img flex">
                 {weather_ultra_cur_temp ? (
-                    <li>{weather_ultra_cur_temp[0].fcstValue}°</li>
+                    <div className="font-gb font-bold text-4xl">{weather_ultra_cur_temp[0].fcstValue}°</div>
                 ) : (
-                    <li>Loading weather data...</li>
+                    <div>Loading weather data...</div>
                 )}
                 {weather_ultra_cur_sky ? (
-                    <li>
+                    <div className="ml-1 ">
                         {weather_ultra_cur_sky[0].fcstValue === 0 ? (
-                            <img src={Sunny} />
+                            <img className="object-contain w-96 h-38" src={Sunny} />
                         ) : weather_ultra_cur_sky[0].fcstValue === 3 ? (
-                            <img src={Cloud} />
+                            <img className="object-contain w-96 h-38" src={Cloud} />
                         ) : (
-                            <img src={Cloud_many} />
+                            <img className="object-contain w-14 h-8" src={Cloud_many} />
                         )}
-                    </li>
+                    </div>
                 ) : (
-                    <li>Loading weather data...</li>
+                    <div>Loading weather data...</div>
                 )}
             </div>
-            <div className="high_low_temp">
+            <div className="mb-3">
                 {weather_vilage ? (
                     // some() 메서드는 배열 안의 어떤 요소라도 주어진 판별 함수를 적어도 하나라도 통과하는지 테스트
                     weather_vilage.some(item => item.category === 'TMN' || item.category === 'TMX') ? (
-                        <p>
+                        <p className="font-gb font-bold text-red-400">
                             {weather_vilage.find(item => item.category === 'TMN').fcstValue}°/&nbsp;
                             {weather_vilage.find(item => item.category === 'TMX').fcstValue}°
                         </p>
@@ -190,12 +191,15 @@ const WeatherInfo = () => {
                     <p>Loading weather data...</p>
                 )}
             </div>
-            <div className="current_reh">
+            <div className="mb-3">
                 {weather_ultra_cur_reh ? (
-                    <p>습도: {weather_ultra_cur_reh[0].fcstValue}%</p>
+                    <p className="font-gb font-bold text-cyan-600 text-sm ">{weather_ultra_cur_reh[0].fcstValue}%</p>
                 ) : (
                     <p>Loading weather data...</p>
                 )}
+            </div>
+            <div>
+                <Clock />
             </div>
         </div>
     );

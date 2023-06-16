@@ -1,24 +1,10 @@
-<<<<<<< HEAD
-<<<<<<< refs/remotes/origin/dev
-import WeatherInfo from './components/WeatherPage/WeatherInfo';
-
-function App() {
-    return (
-        <div>
-            <WeatherInfo />
-        </div>
-=======
-=======
->>>>>>> Clock_feature
-<<<<<<< Updated upstream
+import WrapPage from './components/FoodPage/WrapPage';
+import 'tailwindcss/tailwind.css';
 import KakaoMap from './components/WeatherPage/KakaoMap';
-
-function App() {
-    return (
-        <>
-            <KakaoMap />
-        </>
-=======
+import FoodMap from './components/FoodPage/FoodMap';
+import FoodList from './components/FoodPage/FoodList';
+import FoodContent from './components/FoodPage/FoodContent';
+import StoreBasicInfo from './components/FoodPage/StoreBasicInfo';
 import PlayList from './components/MusicPage/PlayList';
 
 function App() {
@@ -27,11 +13,7 @@ function App() {
         <div>
             <PlayList />
         </div>
->>>>>>> Stashed changes
-<<<<<<< HEAD
->>>>>>> Auto stash before merge of "Clock_feature" and "origin/Clock_feature"
-=======
->>>>>>> Clock_feature
+
     );
 }
 
