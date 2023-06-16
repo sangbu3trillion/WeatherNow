@@ -87,7 +87,7 @@ export default function PlayList() {
         return playlist.map(track => (
             <div key={track.album.id}>
                 <ul>
-                    <li className="bg-white shadow-lg rounded-lg p-4 cursor-pointer hover:bg-gray-50 grid grid-cols-5">
+                    <li className="bg-sky-100/20 shadow-lg rounded-lg p-4 cursor-pointer hover:bg-sky-200/20 grid grid-cols-5">
                         <div className="col-start-1 col-end-1 grid place-items-center">
                             {track.album.images.length ? (
                                 <img width={'50%'} src={track.album.images[0].url} alt="앨범커버" />
@@ -96,12 +96,15 @@ export default function PlayList() {
                             )}
                         </div>
                         <div className="ml-10  w-96">
-                            <h2 className="text-2xl font-bold mb-2">{track.album.name}</h2>
+                            <h2 className="text-2xl font-bold mb-2">{track.name}</h2>
                             <p className="text-xl text-gray-500">{track.album.artists[0].name}</p>
                         </div>
-                        {/* <div className="mx-20 my-auto">
-                            <button className="bg-gray-200 fas fa-play text-white hover:bg-gray-300 hover:text-black font-bold py-2 px-4 rounded"></button>
-                        </div> */}
+                        <div className="col-start-4 col-end-5">
+                            <p className="text-xl text-gray-500">{track.album.name}</p>
+                        </div>
+                        <div className="mx-20 my-auto col-start-5 col-end-6">
+                            <button className="fas fa-play hover:text-red-500 font-bold"></button>
+                        </div>
                     </li>
                 </ul>
             </div>
