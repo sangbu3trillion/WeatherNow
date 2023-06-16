@@ -1,6 +1,12 @@
 import axios from 'axios';
 import React, {useEffect, useState} from 'react';
 import Clock from './Clock';
+import Bad from '../imgs/bad.jpg';
+import Superbad from '../imgs/superbad.jpg';
+import Normal from '../imgs/normal.jpg';
+import Pregood from '../imgs/pregood.jpg';
+import Good from '../imgs/good.jpg';
+
 const city_list = [
     {부산: 2600000000},
     {서울: 1100000000},
@@ -206,56 +212,97 @@ const WeatherRepAndIdx = () => {
     //time값이 존재하면 fetchReport 불러오는 방식 END
 
     return (
-        <div className="border-solid border-2 rounded-xl w-56 shadow-lg p-6">
-            <div className="current_temp_and_img flex">
-                <div>현재 자외선 지수는:</div>
+        <div className="border-solid border-2 rounded-xl w-56 shadow-lg p-6 text-center">
+            <div className="font-gb font-bold text-xl mb-3.5">현재 생활·보건 지수 </div>
+            <div className="mb-3.5">
                 {uv ? (
                     uv.h0 >= 11 ? (
-                        <div className="font-gb font-bold text-4xl">위험 수준</div>
+                        <>
+                            <div className="flex flex-col my-auto items-center">
+                                <img className="object-contain w-20 h-20 " src={Superbad} />
+                            </div>
+                            <div className="text-sm text-red-600 mb-2">위험</div>
+                            <div className="font-gb text-base font-bold">자외선지수</div>
+                        </>
                     ) : uv.h0 >= 8 ? (
-                        <div className="font-gb font-bold text-4xl">매우 높은 수준</div>
+                        <>
+                            <div className="flex flex-col my-auto items-center">
+                                <img className="object-contain w-10 h-10 " src={Bad} />
+                            </div>
+                            <div className="text-sm text-red-400 mb-2">매우높음</div>
+                            <div className="font-gb text-base font-bold">자외선지수</div>
+                        </>
                     ) : uv.h0 >= 6 ? (
-                        <div className="font-gb font-bold text-4xl">높은 수준</div>
+                        <>
+                            <div className="flex flex-col my-auto items-center">
+                                <img className="object-contain w-20 h-20 " src={Normal} />
+                            </div>
+                            <div className="text-sm text-orange-400 mb-2">높음</div>
+                            <div className="font-gb text-base font-bold">자외선지수</div>
+                        </>
                     ) : uv.h0 >= 3 ? (
-                        <div className="font-gb font-bold text-4xl">보통 수준</div>
+                        <>
+                            <div className="flex flex-col my-auto items-center">
+                                <img className="object-contain w-20 h-20 " src={Pregood} />
+                            </div>
+                            <div className="text-sm text-green-500 mb-2">보통</div>
+                            <div className="font-gb text-base font-bold">자외선지수</div>
+                        </>
                     ) : (
-                        <div className="font-gb font-bold text-4xl">낮은 수준</div>
+                        <>
+                            <div className="flex flex-col my-auto items-center">
+                                <img className="object-contain w-20 h-20 " src={Good} />
+                            </div>
+                            <div className="text-sm text-blue-400 mb-2">낮음</div>
+                            <div className="font-gb text-base font-bold">자외선지수</div>
+                        </>
                     )
                 ) : (
                     <div>Loading weather data...</div>
                 )}
-                {/* {weather_ultra_cur_sky ? (
-                    <div className="ml-1 ">
-                        {weather_ultra_cur_sky[0].fcstValue === 0 ? (
-                            <img className="object-contain w-96 h-38" src={Sunny} />
-                        ) : weather_ultra_cur_sky[0].fcstValue === 3 ? (
-                            <img className="object-contain w-96 h-38" src={Cloud} />
-                        ) : (
-                            <img className="object-contain w-14 h-8" src={Cloud_many} />
-                        )}
-                    </div>
-                ) : (
-                    <div>Loading weather data...</div>
-                )} */}
             </div>
+
             <div className="mb-3">
-                <div>현재 대기확산 지수는:</div>
                 {air ? (
                     air.h3 <= 100 ? (
-                        <div className="font-gb font-bold text-4xl">낮음 단계</div>
+                        <>
+                            <div className="flex flex-col my-auto items-center">
+                                <img className="object-contain w-10 h-10 " src={Good} />
+                            </div>
+                            <div className="text-sm text-blue-400 mb-2">낮음</div>
+                            <div className="font-gb text-base font-bold">대기정체지수</div>
+                        </>
                     ) : air.h3 <= 75 ? (
-                        <div className="font-gb font-bold text-4xl">보통 단계</div>
+                        <>
+                            <div className="flex flex-col my-auto items-center">
+                                <img className="object-contain w-10 h-10 " src={Pregood} />
+                            </div>
+                            <div className="text-sm text-green-500 mb-2">보통</div>
+                            <div className="font-gb text-base font-bold">대기정체지수</div>
+                        </>
                     ) : air.h3 <= 50 ? (
-                        <div className="font-gb font-bold text-4xl">높은 단계</div>
+                        <>
+                            <div className="flex flex-col my-auto items-center">
+                                <img className="object-contain w-10 h-10 " src={Normal} />
+                            </div>
+                            <div className="text-sm text-orange-400 mb-2">높음</div>
+                            <div className="font-gb text-base font-bold">대기정체지수</div>
+                        </>
                     ) : air.h3 <= 25 ? (
-                        <div className="font-gb font-bold text-4xl">매우 높음 단계</div>
+                        <>
+                            <div className="flex flex-col my-auto items-center">
+                                <img className="object-contain w-10 h-10 " src={Bad} />
+                            </div>
+                            <div className="text-sm text-red-400 mb-2">매우높음</div>
+                            <div className="font-gb text-base font-bold">대기정체지수</div>
+                        </>
                     ) : null
                 ) : (
                     <div>Loading weather data...</div>
                 )}
             </div>
             <div className="mb-3">
-                <div>현재 기상특보 현황은:</div>
+                <div className="font-gb font-bold text-xl ">기상특보 현황</div>
                 {report ? (
                     report.other && report.t6 && report.t7 === 'o 없음' ? (
                         <div>특보사항은 없습니다.</div>
@@ -268,64 +315,7 @@ const WeatherRepAndIdx = () => {
                     <div>Loading weather data...</div>
                 )}
             </div>
-            <div>
-                <Clock />
-            </div>
         </div>
-
-        // <>
-        //     <div>현재 자외선 지수는:</div>
-        //     <div>
-        //         {uv ? (
-        //             uv.h0 >= 11 ? (
-        //                 <div className="font-gb font-bold text-4xl">위험 수준입니다</div>
-        //             ) : uv.h0 >= 8 ? (
-        //                 <div className="font-gb font-bold text-4xl">매우 높은 수준입니다</div>
-        //             ) : uv.h0 >= 6 ? (
-        //                 <div className="font-gb font-bold text-4xl">높은 수준입니다</div>
-        //             ) : uv.h0 >= 3 ? (
-        //                 <div className="font-gb font-bold text-4xl">보통 수준입니다</div>
-        //             ) : (
-        //                 <div className="font-gb font-bold text-4xl">낮은 수준입니다</div>
-        //             )
-        //         ) : (
-        //             <div>Loading weather data...</div>
-        //         )}
-        //     </div>
-        //     <br />
-        //     {/* 대기확산지수’란 오염물질이 대기중에 유입되어 존재할 경우, 대기상태(소산과 관련된 기상요소)에 의해 변화될 수 있는 가능성 예보를 말한다. */}
-        //     <div>현재 대기확산 지수는:</div>
-        //     <div>
-        //         {air ? (
-        //             air.h3 <= 100 ? (
-        //                 <div className="font-gb font-bold text-4xl">낮음 단계입니다</div>
-        //             ) : air.h3 <= 75 ? (
-        //                 <div className="font-gb font-bold text-4xl">보통 단계입니다</div>
-        //             ) : air.h3 <= 50 ? (
-        //                 <div className="font-gb font-bold text-4xl">높은 단계입니다</div>
-        //             ) : air.h3 <= 25 ? (
-        //                 <div className="font-gb font-bold text-4xl">매우 높음 단계입니다</div>
-        //             ) : null
-        //         ) : (
-        //             <div>Loading weather data...</div>
-        //         )}
-        //     </div>
-        //     <br />
-        //     <div>현재 기상특보 현황은:</div>
-        //     <div>
-        //         {report ? (
-        //             report.other && report.t6 && report.t7 === 'o 없음' ? (
-        //                 <div>특보사항은 없습니다.</div>
-        //             ) : (
-        //                 <div>
-        //                     참고사항: {report.other} 특보: {report.t6} 예비특보: {report.t7}{' '}
-        //                 </div>
-        //             )
-        //         ) : (
-        //             <div>Loading weather data...</div>
-        //         )}
-        //     </div>
-        // </>
     );
 };
 
