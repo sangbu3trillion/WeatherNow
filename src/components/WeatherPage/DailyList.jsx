@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import BasetimeCalc from '../Utils/BasetimeCalc';
 import {CheckWeather} from '../Utils/CheckWeather';
 import {useFetchWeatherQuery} from '../../store';
+import Loading from '../Loading';
 
 export default function DailyList() {
     const serviceKey = process.env.REACT_APP_WEATHER_API;
@@ -22,7 +23,7 @@ export default function DailyList() {
     let date = temp.getDate();
     console.log(date, 'hi');
 
-    const {data, error, isLoading} = useFetchWeatherQuery({
+    const {data, error, isLoading, isFetching} = useFetchWeatherQuery({
         x,
         y,
         serviceKey,
@@ -95,7 +96,7 @@ export default function DailyList() {
         console.log(baseDate);
         if (baseTime) {
             // dataPatch();
-            if (!isLoading) dataPatch2();
+            if (!isLoading && !isFetching) dataPatch2();
         }
     }, [baseTime, x, y, isLoading]);
 
@@ -123,7 +124,9 @@ export default function DailyList() {
     };
     return (
         <>
-            {!isLoading && (
+            {isLoading && isFetching && data && baseDate && baseTime ? (
+                <Loading />
+            ) : (
                 <div className="flex flex-col items-center justify-center h-screen m-auto ">
                     <div className="flex w-80">
                         <p className="mr-2 text-2xl font-bold font-gb ">기온 및 날씨|</p>
