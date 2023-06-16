@@ -1,4 +1,6 @@
 import React from 'react';
+import WeatherInfo from '../WeatherPage/WeatherInfo';
+import KakaoMap from '../WeatherPage/KakaoMap';
 
 const WEATHER_i = '1';
 const WEATHER_p = '2';
@@ -36,7 +38,7 @@ export default function SideBar() {
     //Handler END
 
     return (
-        <div className="shadow-lg w-5/6 m-auto  h-auto p-16">
+        <div className="shadow-lg w-5/6 m-auto  h-auto p-16 flex items-center">
             {/* sidebar navigation */}
             <div id="sidebar-section">
                 <div className="flex gap-5 w-44 ml-2">
@@ -100,7 +102,10 @@ export default function SideBar() {
             </div>
 
             {/* main content */}
-            <div id="content" className="md:ml-24"></div>
+            <div className="flex w-full">
+                <KakaoMap />
+                <WeatherInfo />
+            </div>
         </div>
     );
 }

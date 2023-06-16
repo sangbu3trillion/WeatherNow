@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './css/Loding.module.css';
 
-export default function Loding() {
+export default function Loading() {
     return (
         <>
             <style>@import url('https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap');</style>
