@@ -7,6 +7,8 @@ const FoodMap = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [positions, setPositions] = useState([]);
+    const [activeMarker, setActiveMarker] = useState(null);
+    const [info, setInfo] = useState(null);
 
     const fetchUsers = async () => {
         setError(null);
@@ -25,6 +27,17 @@ const FoodMap = () => {
                 latlng: {lat: item.LAT, lng: item.LNG},
             }));
             setPositions(newPositions);
+
+            const foodList = test.map(items => ({
+                picture: items.MAIN_IMG_THUMB,
+                title: items.MAIN_TITLE,
+                addr: items.ADDR1,
+                tel: items.CNTCT_TEL,
+                time: items.USAGE_DAY_WEEK_AND_TIME,
+                menu: items.RPRSNTV_MENU,
+                detail: items.ITEMCNTNTS,
+            }));
+            setInfo(foodList);
         } catch (e) {
             setError(e);
         }
@@ -35,6 +48,10 @@ const FoodMap = () => {
     useEffect(() => {
         fetchUsers();
     }, []);
+
+    const handleMarkerClick = position => {
+        setActiveMarker(position);
+    };
 
     if (loading) {
         return <div>로딩중..</div>;
@@ -48,11 +65,16 @@ const FoodMap = () => {
 
     return (
         <div>
-            <div>
+            <div className="w-4/6 m-auto mt-14">
                 <p className="mb-10 font-gb font-bold text-5xl ">Today Place</p>
             </div>
             <div className="flex justify-center">
-                <Map center={{lat: 35.1795543, lng: 129.0756416}} style={{width: '1000px', height: '450px'}} level={8}>
+                <Map
+                    className="rounded-lg shadow-lg shadow-blue-500/50"
+                    center={{lat: 35.1795543, lng: 129.0756416}}
+                    style={{width: '1000px', height: '450px'}}
+                    level={8}
+                >
                     {positions.map((position, index) => (
                         <MapMarker
                             key={`${position.title}-${position.latlng}`}
@@ -62,9 +84,39 @@ const FoodMap = () => {
                                 size: {width: 24, height: 35},
                             }}
                             title={position.title}
+                            onClick={() => handleMarkerClick(position)}
                         />
                     ))}
                 </Map>
+            </div>
+            {activeMarker && <FoodContent1 info={info[positions.indexOf(activeMarker)]} />}
+        </div>
+    );
+};
+
+const FoodContent1 = ({info}) => {
+    return (
+        <div className="w-4/6 m-auto mt-10 mb-14 flex justify-center">
+            <div className="mx-20 w-3/4 h-96 border rounded-lg border-slate-200">
+                <div className="flex">
+                    <div>
+                        <img className="mt-3 ml-3 rounded-lg w-64 h-40" src={info.picture} />
+                    </div>
+                    <div className="flex">
+                        <div className="mt-3 ml-4">
+                            <div className="mt-3 mb-3 ">
+                                <p className="text-2xl font-semibold text-slate-500">{info.title}</p>
+                            </div>
+                            <p className="mb-2 text-lg font-mono">Address : {info.addr}</p>
+                            <p className="mb-2 text-lg font-mono">Tel : {info.tel}</p>
+                        </div>
+                    </div>
+                </div>
+                <div className="mt-3 ml-4">
+                    <p className="mb-2 text-lg font-mono">Time : {info.time}</p>
+                    <p className="mb-2 text-lg font-mono">Menu : {info.menu}</p>
+                    <p className="mb-2 text-lg font-mono">Detail : {info.detail}</p>
+                </div>
             </div>
         </div>
     );
