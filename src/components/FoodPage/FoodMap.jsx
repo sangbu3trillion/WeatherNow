@@ -65,11 +65,16 @@ const FoodMap = () => {
 
     return (
         <div>
-            <div>
+            <div className="w-4/6 m-auto mt-14">
                 <p className="mb-10 font-gb font-bold text-5xl ">Today Place</p>
             </div>
             <div className="flex justify-center">
-                <Map center={{lat: 35.1795543, lng: 129.0756416}} style={{width: '1000px', height: '450px'}} level={8}>
+                <Map
+                    className="rounded-lg shadow-lg shadow-blue-500/50"
+                    center={{lat: 35.1795543, lng: 129.0756416}}
+                    style={{width: '1000px', height: '450px'}}
+                    level={8}
+                >
                     {positions.map((position, index) => (
                         <MapMarker
                             key={`${position.title}-${position.latlng}`}
@@ -91,7 +96,7 @@ const FoodMap = () => {
 
 const FoodContent1 = ({info}) => {
     return (
-        <div className=" flex justify-center my-5">
+        <div className="w-4/6 m-auto mt-10 mb-14 flex justify-center">
             <div className="mx-20 w-3/4 h-96 border rounded-lg border-slate-200">
                 <div className="flex">
                     <div>
@@ -102,15 +107,15 @@ const FoodContent1 = ({info}) => {
                             <div className="mt-3 mb-3 ">
                                 <p className="text-2xl font-semibold text-slate-500">{info.title}</p>
                             </div>
-                            <p className="mb-2 text-lg">Address : {info.addr}</p>
-                            <p className="mb-2 text-lg">Tel : {info.tel}</p>
+                            <p className="mb-2 text-lg font-mono">Address : {info.addr}</p>
+                            <p className="mb-2 text-lg font-mono">Tel : {info.tel}</p>
                         </div>
                     </div>
                 </div>
                 <div className="mt-3 ml-4">
-                    <p className="mb-2 text-lg">Time : {info.time}</p>
-                    <p className="mb-2 text-lg">Menu : {info.menu}</p>
-                    <p className="mb-2 text-lg">Detail : {info.detail}</p>
+                    <p className="mb-2 text-lg font-mono">Time : {info.time}</p>
+                    <p className="mb-2 text-lg font-mono">Menu : {info.menu}</p>
+                    <p className="mb-2 text-lg font-mono">Detail : {info.detail}</p>
                 </div>
             </div>
         </div>
