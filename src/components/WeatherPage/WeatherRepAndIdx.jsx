@@ -65,7 +65,7 @@ const WeatherRepAndIdx = () => {
 
         const city = await axios
             .get(`https://dapi.kakao.com/v2/local/geo/coord2address.json?input_coord=WGS84&y=${y}&x=${x}`, {
-                headers: {Authorization: `KakaoAK ${process.env.REACT_APP_API_KAKAO_API_H}`},
+                headers: {Authorization: `KakaoAK 8a2e72241a0c6bdd460d4e3ba175136b`},
             })
             .then(city => {
                 console.log('---- 전체값', city);
@@ -110,7 +110,8 @@ const WeatherRepAndIdx = () => {
         const uv_res = await axios
             .get(`/1360000/LivingWthrIdxServiceV4/getUVIdxV4`, {
                 params: {
-                    serviceKey: process.env.REACT_APP_API_LIVING_WEATHER_API,
+                    serviceKey:
+                        '6YO4sbIcPIzV2/WMukgKakcdfJwxLW28pUxsGNGerNPxgVk/QNBq7t1DuwfGMoQsdDgTduvyC7pbd1qacRTvRQ==',
                     numOfRows: 10,
                     pageNo: 1,
                     areaNo: cityCode,
@@ -146,7 +147,8 @@ const WeatherRepAndIdx = () => {
         const air_res = await axios
             .get(`/1360000/LivingWthrIdxServiceV4/getAirDiffusionIdxV4`, {
                 params: {
-                    serviceKey: process.env.REACT_APP_API_LIVING_WEATHER_API,
+                    serviceKey:
+                        '6YO4sbIcPIzV2/WMukgKakcdfJwxLW28pUxsGNGerNPxgVk/QNBq7t1DuwfGMoQsdDgTduvyC7pbd1qacRTvRQ==',
                     numOfRows: 10,
                     pageNo: 1,
                     areaNo: cityCode,
@@ -304,13 +306,9 @@ const WeatherRepAndIdx = () => {
             <div className="mb-3">
                 <div className="font-gb font-bold text-xl ">기상특보 현황</div>
                 {report ? (
-                    report.other && report.t6 && report.t7 === 'o 없음' ? (
-                        <div>특보사항은 없습니다.</div>
-                    ) : (
-                        <div>
-                            참고사항: {report.other} 특보: {report.t6} 예비특보: {report.t7}{' '}
-                        </div>
-                    )
+                    <div>
+                        특보: {report.t6} 예비특보: {report.t7}{' '}
+                    </div>
                 ) : (
                     <div>Loading weather data...</div>
                 )}
