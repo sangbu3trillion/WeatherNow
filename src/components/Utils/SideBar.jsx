@@ -1,6 +1,7 @@
 import React from 'react';
 import WeatherInfo from '../WeatherPage/WeatherInfo';
 import KakaoMap from '../WeatherPage/KakaoMap';
+import {Link} from 'react-router-dom';
 
 const WEATHER_i = '1';
 const WEATHER_p = '2';
@@ -38,22 +39,22 @@ export default function SideBar() {
     //Handler END
 
     return (
-        <div className="shadow-lg w-5/6 m-auto  h-auto p-16 flex items-center">
+        <div>
             {/* sidebar navigation */}
             <div id="sidebar-section">
-                <div className="flex gap-5 w-44 ml-2">
-                    <button onClick={logoBtnClickHandler} className="text-3xl mb-5 font-bold font-gb">
-                        웨더나우
+                <div className="flex gap-5 ml-2 w-44">
+                    <button onClick={logoBtnClickHandler} className="mb-5 text-3xl font-bold font-gb">
+                        <Link to="/"> 웨더나우</Link>
                     </button>
                 </div>
                 <div
                     id="sidebar"
-                    className=" left-36 mt bg-gray-200 w-20 rounded-xl drop-shadow-xl opacity-60 hover:w-72 duration-200 ml-3 "
+                    className="w-20 ml-3 duration-200 bg-gray-200 left-36 mt rounded-xl drop-shadow-xl opacity-60 hover:w-72"
                 >
-                    <nav role="navigation" className="pl-4 pt-8 mt-4 mb-4 ">
-                        <div className="mt-5 mb-5 relative overflow-hidden">
-                            <ul className="nav-list space-y-8 mb-14" id="nav-list">
-                                <li className="nav-item text-xl active p-2 rounded-l-xl flex gap-5 mb-7 cursor-pointer text-white hover:text-gray-400 ">
+                    <nav role="navigation" className="pt-8 pl-4 mt-4 mb-4 ">
+                        <div className="relative mt-5 mb-5 overflow-hidden">
+                            <ul className="space-y-8 nav-list mb-14" id="nav-list">
+                                <li className="flex gap-5 p-2 text-xl text-white cursor-pointer nav-item active rounded-l-xl mb-7 hover:text-gray-400 ">
                                     <button
                                         onClick={sideBtnClickHandler}
                                         name={WEATHER_i}
@@ -64,10 +65,10 @@ export default function SideBar() {
                                         name={WEATHER_p}
                                         className="text-2xl font-bold font-gb"
                                     >
-                                        weather
+                                        <Link to="/"> weather</Link>
                                     </button>
                                 </li>
-                                <li className="nav-item text-xl p-2 rounded-l-xl flex gap-5 my-7 cursor-pointer text-white hover:text-gray-400">
+                                <li className="flex gap-5 p-2 text-xl text-white cursor-pointer nav-item rounded-l-xl my-7 hover:text-gray-400">
                                     <button
                                         onClick={sideBtnClickHandler}
                                         name={STYLE_i}
@@ -78,10 +79,10 @@ export default function SideBar() {
                                         name={STYLE_p}
                                         className="text-2xl font-bold font-gb"
                                     >
-                                        style
+                                        <Link to="/food"> 맛집</Link>
                                     </button>
                                 </li>
-                                <li className="nav-item text-xl p-2 rounded-l-xl flex gap-5 my-7 cursor-pointer text-white hover:text-gray-400">
+                                <li className="flex gap-5 p-2 text-xl text-white cursor-pointer nav-item rounded-l-xl my-7 hover:text-gray-400">
                                     <button
                                         onClick={sideBtnClickHandler}
                                         name={MUSIC_i}
@@ -102,10 +103,10 @@ export default function SideBar() {
             </div>
 
             {/* main content */}
-            <div className="flex w-full">
+            {/* <div className="flex w-full">
                 <KakaoMap />
                 <WeatherInfo />
-            </div>
+            </div> */}
         </div>
     );
 }
