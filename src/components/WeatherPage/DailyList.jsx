@@ -124,10 +124,10 @@ export default function DailyList() {
     };
     return (
         <>
-            {isLoading && isFetching && data && baseDate && baseTime ? (
+            {isLoading || isFetching || !data || !baseDate || !baseTime ? (
                 <Loading />
             ) : (
-                <div className="flex flex-col items-center justify-center h-screen m-auto ">
+                <div className="flex flex-col m-auto ">
                     <div className="flex w-80">
                         <p className="mr-2 text-2xl font-bold font-gb ">기온 및 날씨|</p>
                         <p
@@ -155,9 +155,9 @@ export default function DailyList() {
                             모레
                         </p>
                     </div>
-                    <div className="flex justify-between w-2/6 p-6 overflow-x-scroll border-2 border-solid shadow-md rounded-xl h-96 scrollbar-track-white scrollbar-thumb-blue-300 scrollbar-thumb-rounded-lg scrollbar-thin ">
+                    <div className="flex justify-between max-w-lg min-w-0 p-6 overflow-x-scroll border-2 border-solid shadow-md rounded-xl h-96 scrollbar-track-white scrollbar-thumb-blue-300 scrollbar-thumb-rounded-lg scrollbar-thin ">
                         {today && (
-                            <div className="flex h=full flex-row w-full ">
+                            <div className="flex flex-row w-full h-full ">
                                 {weather.map(
                                     (e, idx) =>
                                         e.category === 'TMP' &&
@@ -180,7 +180,7 @@ export default function DailyList() {
                                                                 ? 'bg-gradient-to-t from-blue-100 to-red-400'
                                                                 : 'bg-gradient-to-t from-red-300 to-red-700'
                                                         }  text-xs font-medium text-blue-100
-                                             text-center p-0.5 leading-none rounded-full flex justify-center items-center 
+                                                        text-center p-0.5 leading-none rounded-full flex justify-center items-center   
                                             
                                              `}
                                                         style={{height: `${e.fcstValue * 1 + 35}%`}}
@@ -202,7 +202,7 @@ export default function DailyList() {
                             </div>
                         )}
                         {tommorow && (
-                            <div className="flex h=full flex-row w-full ">
+                            <div className="flex flex-row w-full h-full ">
                                 {weather.map(
                                     (e, idx) =>
                                         e.category === 'TMP' &&
@@ -248,7 +248,7 @@ export default function DailyList() {
                             </div>
                         )}
                         {afterTommorow && (
-                            <div className="flex h=full flex-row w-full">
+                            <div className="flex flex-row w-full h-full">
                                 {weather.map(
                                     (e, idx) =>
                                         e.category === 'TMP' &&

@@ -1,5 +1,4 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
-import XYposition from '../../components/Utils/XYposition';
 import {dfs_xy_conv} from '../../components/Utils/XYtranselate';
 
 const weatherApi = createApi({
@@ -18,7 +17,7 @@ const weatherApi = createApi({
                             numOfRows: 700,
                             pageNo: 1,
                             base_date: weather.baseDate,
-                            base_time: weather.baseTime,
+                            base_time: '0200',
                             nx: dfs_xy_conv('toXY', weather.x, weather.y).x,
                             ny: dfs_xy_conv('toXY', weather.x, weather.y).y,
                             dataType: 'JSON',
