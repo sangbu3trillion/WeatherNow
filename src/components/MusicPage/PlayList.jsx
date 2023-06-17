@@ -16,10 +16,13 @@ export default function PlayList() {
     const [token, setToken] = useState('');
 
     //hover event
-    const [hover, setHover] = useState('');
+    const [hover, setHover] = useState(false);
 
     //search
     const [searchKey, setSearchKey] = useState('');
+
+    // player
+    const [player, setPlayer] = useState(null);
 
     //useEffect : token
     useEffect(() => {
@@ -42,6 +45,7 @@ export default function PlayList() {
         setToken(token);
     }, []);
 
+    //
     useEffect(() => {
         if (token) {
             axios
@@ -59,6 +63,40 @@ export default function PlayList() {
         }
     }, [token]);
 
+    //
+    useEffect(() => {
+        if (token && !player) {
+            window.onSpotifyWebPlaybackSDKReady = () => {
+                const player = new window.Spotify.Player({
+                    name: 'My Spotify Player',
+                    getOAuthToken: cb => {
+                        cb(token);
+                    },
+                });
+
+                // Ready
+                player.addListener('ready', ({device_id}) => {
+                    console.log('Ready with Device ID', device_id);
+                    playTrack(device_id); // 플레이어가 준비되면 재생 함수 호출
+                });
+
+                // Not Ready
+                player.addListener('not_ready', ({device_id}) => {
+                    console.log('Device ID has gone offline', device_id);
+                });
+
+                // Connect to the player
+                player.connect().then(success => {
+                    if (success) {
+                        console.log('The Web Playback SDK successfully connected to Spotify!');
+                    }
+                });
+
+                setPlayer(player);
+            };
+        }
+    }, [token, player]);
+
     // logout
     const logout = () => {
         setToken('');
@@ -66,28 +104,53 @@ export default function PlayList() {
         setPlaylist([]);
     };
 
+    // serch
     const searchMusic = async e => {
-        e.preventDefault();
-        const {data} = await axios.get('https://api.spotify.com/v1/search', {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-            params: {
-                q: searchKey,
-                type: 'track',
-            },
-        });
+        try {
+            e.preventDefault();
+            const {data} = await axios.get('https://api.spotify.com/v1/search', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+                params: {
+                    q: searchKey,
+                    type: 'track',
+                },
+            });
 
-        setPlaylist(data.tracks.items);
+            setPlaylist(data.tracks.items);
+        } catch (error) {
+            console.error(error);
+        }
     };
-    console.log(playlist);
+
+    //playHandler
+    const playTrack = uri => {
+        console.log(token);
+
+        if (player) {
+            player._options.getOAuthToken(token => {
+                fetch(`https://api.spotify.com/v1/me/player/play?device_id=${player._options.id}`, {
+                    method: 'PUT',
+                    body: JSON.stringify({uris: [uri]}),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+            });
+        }
+    };
 
     //render
     const renderMusic = () => {
         return playlist.map(track => (
             <div key={track.album.id}>
                 <ul>
-                    <li className="bg-sky-100/20 shadow-lg rounded-lg p-4 cursor-pointer hover:bg-sky-200/20 grid grid-cols-5">
+                    <li
+                        className="bg-sky-100/20 shadow-lg rounded-lg p-4 cursor-pointer hover:bg-sky-200/20 grid grid-cols-5"
+                        onClick={() => track.uri}
+                    >
                         <div className="col-start-1 col-end-1 grid place-items-center">
                             {track.album.images.length ? (
                                 <img width={'50%'} src={track.album.images[0].url} alt="앨범커버" />
@@ -95,7 +158,7 @@ export default function PlayList() {
                                 <div>No Image</div>
                             )}
                         </div>
-                        <div className="ml-10  w-96">
+                        <div className="ml-10 w-80">
                             <h2 className="text-2xl font-bold mb-2">{track.name}</h2>
                             <p className="text-xl text-gray-500">{track.album.artists[0].name}</p>
                         </div>
@@ -103,7 +166,10 @@ export default function PlayList() {
                             <p className="text-xl text-gray-500">{track.album.name}</p>
                         </div>
                         <div className="mx-20 my-auto col-start-5 col-end-6">
-                            <button className="fas fa-play hover:text-red-500 font-bold"></button>
+                            <button
+                                className="fas fa-play hover:text-red-500 font-bold"
+                                onClick={() => playTrack(track.uri)}
+                            ></button>
                         </div>
                     </li>
                 </ul>
@@ -148,10 +214,13 @@ export default function PlayList() {
                 )}
             </div>
             <form onSubmit={searchMusic}>
-                <input type="text" onChange={e => setSearchKey(e.target.value)} />
-                <button type={'submit'}>Search</button>
+                <input type="text" onChange={e => setSearchKey(e.target.value)} />에 울리는 노래 추천해 드릴게요 !
+                <button className="m-10 bg-sky-200" type={'submit'}>
+                    Search
+                </button>
             </form>
             <div>
+                <script src="https://sdk.scdn.co/spotify-player.js"></script>
                 <ul className="gap-3 grid place-items-center">{renderMusic()}</ul>
             </div>
         </div>
