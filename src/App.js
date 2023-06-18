@@ -20,6 +20,7 @@ function App() {
                     </Routes>
                 </div>
             </BrowserRouter>
+            {/* <Loading /> */}
         </div>
     );
 }
