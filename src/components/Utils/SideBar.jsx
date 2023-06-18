@@ -1,6 +1,5 @@
 import React from 'react';
-import WeatherInfo from '../WeatherPage/WeatherInfo';
-import KakaoMap from '../WeatherPage/KakaoMap';
+
 import {Link} from 'react-router-dom';
 
 const WEATHER_i = '1';
@@ -93,7 +92,7 @@ export default function SideBar() {
                                         name={MUSIC_p}
                                         className="text-2xl font-bold font-gb"
                                     >
-                                        music
+                                        <Link to="/music"> music</Link>
                                     </button>
                                 </li>
                             </ul>
