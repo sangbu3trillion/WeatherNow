@@ -3,6 +3,7 @@ import {dfs_xy_conv} from '../../components/Utils/XYtranselate';
 
 const weatherApi = createApi({
     reducerPath: 'weather',
+    keepUnusedDataFor: 600,
     baseQuery: fetchBaseQuery({
         baseUrl: 'http://localhost:3000',
     }),
@@ -27,11 +28,6 @@ const weatherApi = createApi({
                 },
             }),
         };
-    },
-    defaultOptions: {
-        queries: {
-            cacaheTime: 600,
-        },
     },
 });
 
