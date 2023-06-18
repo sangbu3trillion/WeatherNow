@@ -5,8 +5,6 @@ import {useFetchWeatherQuery} from '../../store';
 import Loading from '../Loading';
 
 export default function DailyList() {
-    const serviceKey = process.env.REACT_APP_WEATHER_API;
-
     const [x, setX] = useState(null);
     const [y, setY] = useState(null);
     const [weather, setWeather] = useState([]);
@@ -23,10 +21,9 @@ export default function DailyList() {
     let date = temp.getDate();
     console.log(date, 'hi');
 
-    const {data, error, isLoading, isFetching} = useFetchWeatherQuery({
+    const {data, error, isLoading} = useFetchWeatherQuery({
         x,
         y,
-        serviceKey,
         baseDate,
         baseTime: baseTime + '00',
     });
@@ -96,7 +93,7 @@ export default function DailyList() {
         console.log(baseDate);
         if (baseTime) {
             // dataPatch();
-            if (!isLoading && !isFetching) dataPatch2();
+            if (!isLoading) dataPatch2();
         }
     }, [baseTime, x, y, isLoading]);
 
@@ -115,6 +112,7 @@ export default function DailyList() {
         setTommorow(true);
         setBaseDate(year.toString() + month.toString() + (date + 1).toString());
     };
+
     const DayAfterTomorrow = () => {
         console.log('day after tomorrow');
         setTommorow(false);
@@ -124,7 +122,7 @@ export default function DailyList() {
     };
     return (
         <>
-            {isLoading || isFetching || !data || !baseDate || !baseTime ? (
+            {isLoading || !data || !baseDate || !baseTime ? (
                 <Loading />
             ) : (
                 <div className="flex flex-col m-auto ">
