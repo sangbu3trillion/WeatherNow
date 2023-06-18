@@ -28,6 +28,11 @@ const weatherApi = createApi({
             }),
         };
     },
+    defaultOptions: {
+        queries: {
+            cacaheTime: 600,
+        },
+    },
 });
 
 export const {useFetchWeatherQuery} = weatherApi;
