@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import AudioPlayer from './AudioPlayer';
 
 const MusicTrackItem = ({track}) => {
     const [isPlaying, setIsPlaying] = useState(false);
@@ -13,6 +12,9 @@ const MusicTrackItem = ({track}) => {
         }
         setIsPlaying(!isPlaying);
     };
+
+    const playIcon = <i className="fas fa-play"></i>;
+    const pauseIcon = <i className="fas fa-stop"></i>;
 
     return (
         <div key={track.album.id}>
@@ -33,12 +35,8 @@ const MusicTrackItem = ({track}) => {
                         <p className="text-xl text-gray-500">{track.album.name}</p>
                     </div>
                     <div className="mx-20 my-auto col-start-5 col-end-6">
-                        <button
-                            // className={`fas fa-play hover:text-red-500 font-bold ${isPlaying ? 'playing' : ''}`}
-                            // onClick={togglePlay}
-                            className={`fas fa-play hover:text-red-500 font-bold`}
-                        >
-                            {togglePlay}
+                        <button onClick={togglePlay} className="icon-button">
+                            {isPlaying ? pauseIcon : playIcon}
                         </button>
                     </div>
                 </li>
