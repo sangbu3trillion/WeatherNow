@@ -31,17 +31,16 @@ const WeatherRepAndIdx = () => {
     const [city, setCity] = useState(null);
     const [uv, setUv] = useState(null);
     const [air, setAir] = useState(null);
-    const [report, setReport] = useState(null);
     const [x, setX] = useState(null);
     const [y, setY] = useState(null);
 
-    let temp = new Date();
-    let year = temp.getFullYear();
-    let month = temp.getMonth() + 1 < 10 ? '0' + (temp.getMonth() + 1) : temp.getMonth() + 1;
-    let date = temp.getDate() < 10 ? '0' + temp.getDate() : temp.getDate();
+    let time = new Date();
+    let year = time.getFullYear();
+    let month = time.getMonth() + 1 < 10 ? '0' + (time.getMonth() + 1) : time.getMonth() + 1;
+    let date = time.getDate() < 10 ? '0' + time.getDate() : time.getDate();
 
-    let hour = temp.getHours() < 10 ? '0' + temp.getHours() : temp.getHours();
-    let time = year.toString() + month.toString() + date.toString() + hour.toString();
+    let hour = time.getHours() < 10 ? '0' + time.getHours() : time.getHours();
+    let cur_time = year.toString() + month.toString() + date.toString() + hour.toString();
 
     //현재 위도 경도를 가져오는 작업 START
     function init() {
@@ -115,7 +114,7 @@ const WeatherRepAndIdx = () => {
                     numOfRows: 10,
                     pageNo: 1,
                     areaNo: cityCode,
-                    time: time,
+                    time: cur_time,
                     dataType: 'JSON',
                 },
             })
@@ -152,7 +151,7 @@ const WeatherRepAndIdx = () => {
                     numOfRows: 10,
                     pageNo: 1,
                     areaNo: cityCode,
-                    time: time,
+                    time: cur_time,
                     dataType: 'JSON',
                 },
             })
@@ -170,48 +169,13 @@ const WeatherRepAndIdx = () => {
 
     // 대기확산지수 API를 가져오는 axios 코드 END
 
-    //cityCode값이 존재하면 fetchUv 불러오는 방식 START
+    //cityCode값이 존재하면 fetchAir 불러오는 방식 START
     useEffect(() => {
         if (cityCode) {
             fetchAir();
         }
     }, [time, cityCode]);
-    //cityCode값이 존재하면 fetchUv 불러오는 방식 END
-
-    // 기상특보 API를 가져오는 axios 코드 START
-
-    const fetchReport = async () => {
-        const report_res = await axios
-            .get(`/1360000/WthrWrnInfoService/getPwnStatus`, {
-                params: {
-                    serviceKey:
-                        '6YO4sbIcPIzV2/WMukgKakcdfJwxLW28pUxsGNGerNPxgVk/QNBq7t1DuwfGMoQsdDgTduvyC7pbd1qacRTvRQ==',
-                    numOfRows: 10,
-                    pageNo: 1,
-                    dataType: 'JSON',
-                },
-            })
-            .then(report_res => {
-                // .then은 get으로 가져오면, 그 다음에 가져온 데이터로 다음과 같이 처리하라는 의미
-                // 통신이 왔다 갔다 하면 성공으로 본다.(제대로 데이터를 못 받아도)
-                console.log('success!!'); // 그래서 원래 데이터를 받는 검수과정이 들어 가야 한다.
-                console.log('기상특보', report_res.data.response.body.items.item[0]);
-                setReport(report_res.data.response.body.items.item[0]);
-            })
-            .catch(e => {
-                console.log('error!!'); // 통신 장애 발생시 출력하는 오류
-            });
-    };
-
-    // 기상특보 API를 가져오는 axios 코드 END
-
-    //time값이 존재하면 fetchReport 불러오는 방식 START
-    useEffect(() => {
-        if (time) {
-            fetchReport();
-        }
-    }, [time]);
-    //time값이 존재하면 fetchReport 불러오는 방식 END
+    //cityCode값이 존재하면 fetchAir 불러오는 방식 END
 
     return (
         <div className="border-solid border-2 rounded-xl w-56 shadow-lg p-6 text-center">
@@ -299,16 +263,6 @@ const WeatherRepAndIdx = () => {
                             <div className="font-gb text-base font-bold">대기정체지수</div>
                         </>
                     ) : null
-                ) : (
-                    <div>Loading weather data...</div>
-                )}
-            </div>
-            <div className="mb-3">
-                <div className="font-gb font-bold text-xl ">기상특보 현황</div>
-                {report ? (
-                    <div>
-                        특보: {report.t6} 예비특보: {report.t7}{' '}
-                    </div>
                 ) : (
                     <div>Loading weather data...</div>
                 )}
