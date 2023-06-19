@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React, {useEffect, useState} from 'react';
-import Clock from './Clock';
 import Bad from '../imgs/bad.jpg';
 import Superbad from '../imgs/superbad.jpg';
 import Normal from '../imgs/normal.jpg';
@@ -137,7 +136,7 @@ const WeatherRepAndIdx = () => {
         if (cityCode) {
             fetchUv();
         }
-    }, [time, cityCode]);
+    }, [cur_time, cityCode]);
     //cityCode값이 존재하면 fetchUv 불러오는 방식 END
 
     // 대기확산지수 API를 가져오는 axios 코드 START
@@ -174,7 +173,7 @@ const WeatherRepAndIdx = () => {
         if (cityCode) {
             fetchAir();
         }
-    }, [time, cityCode]);
+    }, [cur_time, cityCode]);
     //cityCode값이 존재하면 fetchAir 불러오는 방식 END
 
     return (
