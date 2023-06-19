@@ -1,21 +1,14 @@
 import {useState} from 'react';
 import './PlayList.css';
+import {loginEndpoint} from './Spotify';
 
 export default function MusicLoginButton({token, onClickLogout}) {
-    const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
-    const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI;
-    const AUTH_ENDPOINT = process.env.REACT_APP_AUTH_ENDPOINT;
-    const RESPONSE_TYPE = 'token';
-
     //hover event
     const [hover, setHover] = useState(false);
 
     if (!token) {
         return (
-            <a
-                className="text-gray-400"
-                href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}
-            >
+            <a className="text-gray-400" href={loginEndpoint}>
                 <span className="text-black hover:text-blue-300 text-3xl leading-5">Login to Spotify</span>
                 &nbsp;
                 <span
