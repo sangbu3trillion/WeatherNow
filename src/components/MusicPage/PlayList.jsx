@@ -3,6 +3,7 @@ import MusicLoginButton from './MusicLoginButton';
 import MusicSearchForm from './MusicSearchForm';
 import MusicTrackItem from './MusicTrackItem';
 import {setClientToken} from './Spotify';
+import VerticalCardSlider from './VerticalCardSlider';
 
 export default function Music() {
     const [playlist, setPlaylist] = useState([]);

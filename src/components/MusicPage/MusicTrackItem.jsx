@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 const MusicTrackItem = ({track}) => {
     const [isPlaying, setIsPlaying] = useState(false);
     const audioRef = React.useRef(new Audio(track.preview_url));
-
+    console.log('track ', track);
     const togglePlay = () => {
         if (isPlaying) {
             audioRef.current.pause();
@@ -13,8 +13,13 @@ const MusicTrackItem = ({track}) => {
         setIsPlaying(!isPlaying);
     };
 
-    const playIcon = <i className="fas fa-play"></i>;
-    const pauseIcon = <i className="fas fa-stop"></i>;
+    // 정지, 재생 아이콘
+    const playIcon = (
+        <i className="p-3 text-white fas fa-play bg-gradient-to-b from-sky-200/70 to-indigo-300/70 rounded-lg hover:text-gray-100"></i>
+    );
+    const pauseIcon = (
+        <i className="p-3  text-white fas fa-stop bg-gradient-to-b from-sky-200/70 to-indigo-300/70 rounded-lg hover:text-gray-100"></i>
+    );
 
     return (
         <div key={track.album.id}>
