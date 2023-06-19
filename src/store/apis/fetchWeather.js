@@ -15,7 +15,7 @@ const weatherApi = createApi({
                         url: 'https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst',
                         params: {
                             serviceKey: process.env.REACT_APP_WEATHER_API,
-                            numOfRows: 700,
+                            numOfRows: weather.numOfRows,
                             pageNo: 1,
                             base_date: weather.baseDate,
                             base_time: '0200',

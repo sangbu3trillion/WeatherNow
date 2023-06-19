@@ -2,16 +2,65 @@ import axios from 'axios';
 import React, {useEffect, useState} from 'react';
 import {Map, MapMarker} from 'react-kakao-maps-sdk';
 
+import {useFetchWeatherQuery} from '../../store';
+import BasetimeCalc from '../Utils/BasetimeCalc';
+import {CheckWeather} from '../Utils/CheckWeather';
+
 const FoodMap = () => {
     const [users, setUsers] = useState(null);
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
+
     const [positions, setPositions] = useState([]);
     const [activeMarker, setActiveMarker] = useState(null);
     const [info, setInfo] = useState(null);
+    const [x, setX] = useState(null);
+    const [y, setY] = useState(null);
+    const [baseTime, setBasetime] = useState(null);
+    const [baseDate, setBaseDate] = useState(null);
+    let temp = new Date();
+    let hour = temp.getHours();
 
+    let year = temp.getFullYear();
+    let month = temp.getMonth() + 1 < 10 ? '0' + (temp.getMonth() + 1) : temp.getMonth() + 1;
+    let date = temp.getDate();
+
+    const {data, isLoading, refetch, error} = useFetchWeatherQuery({
+        x,
+        y,
+        numOfRows: 253,
+        baseDate,
+        baseTime: baseTime + '00',
+    });
+
+    console.log(data, 'data');
+
+    function init() {
+        function success(pos) {
+            const x = pos.coords.latitude;
+            const y = pos.coords.longitude;
+
+            setBasetime(BasetimeCalc(hour).baseTime);
+
+            if (BasetimeCalc(hour).flag === true) {
+                console.log('flag true');
+                date = date - 1;
+                console.log(date, '55');
+                date < 10
+                    ? setBaseDate(year.toString() + month.toString() + '0' + date.toString())
+                    : setBaseDate(year.toString() + month.toString() + date.toString());
+            } else {
+                setBaseDate(year.toString() + month.toString() + date.toString());
+            }
+            setX(x);
+            setY(y);
+        }
+
+        function error(err) {
+            console.log(err);
+        }
+        navigator.geolocation.getCurrentPosition(success, error);
+    }
     const fetchUsers = async () => {
-        setError(null);
         setUsers(null);
         setLoading(true);
 
@@ -39,7 +88,7 @@ const FoodMap = () => {
             }));
             setInfo(foodList);
         } catch (e) {
-            setError(e);
+            console.log(e);
         }
 
         setLoading(false);
@@ -47,26 +96,34 @@ const FoodMap = () => {
 
     useEffect(() => {
         fetchUsers();
+        init();
     }, []);
 
     const handleMarkerClick = position => {
         setActiveMarker(position);
     };
 
-    if (loading) {
+    if (loading || isLoading) {
         return <div>로딩중..</div>;
     }
     if (error) {
         return <div>에러가 발생했습니다</div>;
     }
-    if (users === null) {
+    if (users === null || !data) {
         return null;
     }
-
+    const weather = data.response.body.items.item;
+    let fwth = weather.filter(e => {
+        if (e.fcstTime === baseTime + '00' && (e.category === 'PTY' || e.category === 'SKY')) return true;
+        return false;
+    });
+    console.log(fwth, 'fwth');
+    let ret = CheckWeather(fwth, '', 2);
+    console.log(ret, 'ret');
     return (
         <div>
             <div className="w-4/6 m-auto mt-14">
-                <p className="mb-10 font-gb font-bold text-5xl ">Today Place</p>
+                <p className="mb-10 text-5xl font-bold font-gb ">Today Place</p>
             </div>
             <div className="flex justify-center">
                 <Map
@@ -96,26 +153,26 @@ const FoodMap = () => {
 
 const FoodContent1 = ({info}) => {
     return (
-        <div className="w-4/6 m-auto mt-10 mb-14 flex justify-center">
-            <div className="mx-20 w-3/4 h-96 border rounded-lg border-slate-200">
+        <div className="flex justify-center w-4/6 m-auto mt-10 mb-14">
+            <div className="w-3/4 mx-20 border rounded-lg h-96 border-slate-200">
                 <div className="flex">
                     <div>
-                        <img className="mt-3 ml-3 rounded-lg w-64 h-40" src={info.picture} />
+                        <img className="w-64 h-40 mt-3 ml-3 rounded-lg" src={info.picture} />
                     </div>
                     <div className="flex">
                         <div className="mt-3 ml-4">
                             <div className="mt-3 mb-3 ">
                                 <p className="text-2xl font-semibold text-slate-500">{info.title}</p>
                             </div>
-                            <p className="mb-2 text-lg font-mono">Address : {info.addr}</p>
-                            <p className="mb-2 text-lg font-mono">Tel : {info.tel}</p>
+                            <p className="mb-2 font-mono text-lg">Address : {info.addr}</p>
+                            <p className="mb-2 font-mono text-lg">Tel : {info.tel}</p>
                         </div>
                     </div>
                 </div>
                 <div className="mt-3 ml-4">
-                    <p className="mb-2 text-lg font-mono">Time : {info.time}</p>
-                    <p className="mb-2 text-lg font-mono">Menu : {info.menu}</p>
-                    <p className="mb-2 text-lg font-mono">Detail : {info.detail}</p>
+                    <p className="mb-2 font-mono text-lg">Time : {info.time}</p>
+                    <p className="mb-2 font-mono text-lg">Menu : {info.menu}</p>
+                    <p className="mb-2 font-mono text-lg">Detail : {info.detail}</p>
                 </div>
             </div>
         </div>

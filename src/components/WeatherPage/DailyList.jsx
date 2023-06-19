@@ -19,11 +19,11 @@ export default function DailyList() {
     let year = temp.getFullYear();
     let month = temp.getMonth() + 1 < 10 ? '0' + (temp.getMonth() + 1) : temp.getMonth() + 1;
     let date = temp.getDate();
-    console.log(date, 'hi');
 
-    const {data, error, isLoading} = useFetchWeatherQuery({
+    const {data, error, isLoading, isFetching, refetch} = useFetchWeatherQuery({
         x,
         y,
+        numOfRows: 700,
         baseDate,
         baseTime: baseTime + '00',
     });
@@ -54,7 +54,8 @@ export default function DailyList() {
 
     function dataPatch2() {
         console.log(data, 'data');
-        setWeather(cur => data.response.body.items.item);
+        // refetch();
+        setWeather(data.response.body.items.item);
     }
 
     function init() {
@@ -120,9 +121,10 @@ export default function DailyList() {
         setAfterTommorow(true);
         setBaseDate(year.toString() + month.toString() + (date + 2).toString());
     };
+    console.log(isFetching, 'isFetching');
     return (
         <>
-            {isLoading || !data || !baseDate || !baseTime ? (
+            {isFetching || !data || !baseDate || !baseTime ? (
                 <Loading />
             ) : (
                 <div className="flex flex-col m-auto ">
@@ -166,7 +168,7 @@ export default function DailyList() {
                                                 <div className="ml-1 mr-4 text-2xl font-bold">{e.fcstValue + '°'}</div>
                                                 <div>
                                                     <img
-                                                        src={`resource/${CheckWeather(weather, e.fcstTime)}.gif`}
+                                                        src={`resource/${CheckWeather(weather, e.fcstTime, 1)}.gif`}
                                                         alt="클라우드"
                                                         className="w-8 h-8 mr-3"
                                                     ></img>
