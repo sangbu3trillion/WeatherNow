@@ -5,6 +5,8 @@ import {Map, MapMarker} from 'react-kakao-maps-sdk';
 import {useFetchWeatherQuery} from '../../store';
 import BasetimeCalc from '../Utils/BasetimeCalc';
 import {CheckWeather} from '../Utils/CheckWeather';
+import {FoodList} from '../Utils/FoodList';
+console.log(FoodList, 'FoodList');
 
 const FoodMap = () => {
     const [users, setUsers] = useState(null);
@@ -70,11 +72,19 @@ const FoodMap = () => {
             );
 
             setUsers(response.data);
-            const test = response.data.getFoodKr.item.filter(e => e.RPRSNTV_MENU.includes('수육'));
+
+            let test = response.data.getFoodKr.item.filter(e => e.RPRSNTV_MENU.includes('수육'));
+            let test2 = response.data.getFoodKr.item.filter(e => e.RPRSNTV_MENU.includes(FoodList[0][ret][1]));
+            let test3 = response.data.getFoodKr.item.filter(e => e.RPRSNTV_MENU.includes(FoodList[0][ret][2]));
+            console.log(test3, 'test3');
+            test = test.concat(test2);
+            test = test.concat(test3);
+            console.log(test, 'test');
             const newPositions = test.map(item => ({
                 title: item.MAIN_TITLE,
                 latlng: {lat: item.LAT, lng: item.LNG},
             }));
+
             setPositions(newPositions);
 
             const foodList = test.map(items => ({
@@ -117,9 +127,11 @@ const FoodMap = () => {
         if (e.fcstTime === baseTime + '00' && (e.category === 'PTY' || e.category === 'SKY')) return true;
         return false;
     });
+
     console.log(fwth, 'fwth');
     let ret = CheckWeather(fwth, '', 2);
     console.log(ret, 'ret');
+
     return (
         <div>
             <div className="w-4/6 m-auto mt-14">
