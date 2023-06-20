@@ -18,7 +18,7 @@ const FoodMap = () => {
     const [y, setY] = useState(null);
     const [baseTime, setBasetime] = useState(null);
     const [baseDate, setBaseDate] = useState(null);
-    const clickRef = useRef();
+
     let temp = new Date();
     let hour = temp.getHours();
     let year = temp.getFullYear();
@@ -26,19 +26,21 @@ const FoodMap = () => {
     let date = temp.getDate();
 
     const weatherData = useFetchWeatherQuery({
+        //날씨 데이터 가져오기
         x,
         y,
-        numOfRows: 253,
+        numOfRows: 253, //날씨데이터 253개 , 1시간에 6개, 새벽3시부터 00시
         baseDate,
         baseTime: baseTime + '00',
     });
 
-    const foodData = useFetchFoodQuery();
+    const foodData = useFetchFoodQuery(); //음식 데이터 가져오기
 
     console.log(weatherData.data, 'data');
     console.log(foodData.data, 'foodData');
 
     function init() {
+        //위치정보 가져오기, 위도경도 가져오기
         function success(pos) {
             const x = pos.coords.latitude;
             const y = pos.coords.longitude;
@@ -62,7 +64,7 @@ const FoodMap = () => {
         function error(err) {
             console.log(err);
         }
-        navigator.geolocation.getCurrentPosition(success, error);
+        navigator.geolocation.getCurrentPosition(success, error); //사용자의 현재위치
     }
 
     useEffect(() => {
@@ -96,10 +98,10 @@ const FoodMap = () => {
         return null;
     }
 
-    const weather = weatherData.data.response.body.items.item;
+    const weather = weatherData.data.response.body.items.item; //날씨 데이터
 
     let fwth = weather.filter(e => {
-        if (e.fcstTime === baseTime + '00' && (e.category === 'PTY' || e.category === 'SKY')) return true;
+        if (e.fcstTime === baseTime + '00' && (e.category === 'PTY' || e.category === 'SKY')) return true; //PTY강수형태, SKY 하늘의 상태
         return false;
     });
 
@@ -153,7 +155,6 @@ const FoodMap = () => {
                                 src: `${process.env.PUBLIC_URL}/ci.png`,
                                 size: {width: 35, height: 45},
                             }}
-                            ref={clickRef}
                             title={position.title}
                             onClick={() => handleMarkerClick(position)}
                         />
