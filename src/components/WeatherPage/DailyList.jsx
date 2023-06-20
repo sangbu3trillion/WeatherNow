@@ -26,7 +26,7 @@ export default function DailyList() {
         baseDate,
         baseTime: baseTime + '00',
     });
-    const foodData = useFetchFoodQuery();
+
     console.log(weatherData.data, 'data');
     console.log(weatherData.isLoading, 'isLoading');
     console.log(weatherData.error, 'error');
@@ -105,7 +105,6 @@ export default function DailyList() {
     console.log(weatherData.isLoading, 'isLoading');
 
     if (
-        foodData.isFetching ||
         weatherData.isLoading ||
         weatherData.isFetching ||
         baseTime === null ||
@@ -115,12 +114,11 @@ export default function DailyList() {
     ) {
         return <div>로딩중..</div>;
     }
-    if (weatherData.error || foodData.error) {
+    if (weatherData.error) {
         weatherData.refetch();
-        foodData.refetch();
         return <div>에러가 발생했습니다</div>;
     }
-    if (!weatherData.data || !foodData.data) {
+    if (!weatherData.data) {
         console.log('null');
         return null;
     }
