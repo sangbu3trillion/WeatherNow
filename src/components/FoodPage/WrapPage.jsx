@@ -6,7 +6,7 @@ const WrapPage = () => {
     return (
         <div className="w-4/6 m-auto mt-14">
             <FoodMap />
-            <FoodContent />
+            {/* <FoodContent /> */}
         </div>
     );
 };
