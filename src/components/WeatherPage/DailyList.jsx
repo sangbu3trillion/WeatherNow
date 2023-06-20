@@ -125,10 +125,10 @@ export default function DailyList() {
     console.log(isLoading, 'isLoading');
     return (
         <>
-            {isLoading || !data || !baseDate || !baseTime ? (
+            {isFetching || !data || !baseDate || !baseTime ? (
                 <Loading />
             ) : (
-                <div className="flex flex-col m-auto ">
+                <div className="flex flex-col my-auto ">
                     <div className="flex w-80">
                         <p className="mr-2 text-2xl font-bold font-gb ">기온 및 날씨|</p>
                         <p
@@ -156,7 +156,7 @@ export default function DailyList() {
                             모레
                         </p>
                     </div>
-                    <div className="flex justify-between max-w-lg min-w-0 p-6 overflow-x-scroll border-2 border-solid shadow-md rounded-xl h-96 scrollbar-track-white scrollbar-thumb-blue-300 scrollbar-thumb-rounded-lg scrollbar-thin ">
+                    <div className="flex justify-between max-w-2xl min-w-0 p-6 overflow-x-scroll border-2 border-solid shadow-md rounded-xl h-96 scrollbar-track-white scrollbar-thumb-blue-300 scrollbar-thumb-rounded-lg scrollbar-thin ">
                         {today && (
                             <div className="flex flex-row w-full h-full ">
                                 {weather.map(

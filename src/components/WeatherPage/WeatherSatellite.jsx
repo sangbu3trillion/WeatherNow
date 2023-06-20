@@ -52,18 +52,20 @@ const WeatherRadar = () => {
 
     return (
         <div>
-            <span className="font-gb font-bold text-xl mr-2">레이더 영상</span>
+            <span className="mr-2 text-2xl font-bold font-gb ">레이더 영상</span>
             <span className="font-gb text-slate-400 text-sm ">
                 {' '}
                 | {time.getHours() < 10 ? '0' + (time.getHours() - 1) + ':00' : time.getHours() - 1 + ':00'} 기준
             </span>
-            <img
-                className="border-solid border-2 rounded-xl shadow-lg p-3 mt-1"
-                src={radar}
-                alt="레이더 영상"
-                width="335"
-                height="340"
-            />
+            <div className="p-2 border-2 border-solid shadow-md rounded-xl h-96 ">
+                <img
+                    // className="border-solid border-2 rounded-xl shadow-lg p-3 mt-1"
+                    src={radar}
+                    alt="레이더 영상"
+                    width="375"
+                    height="390"
+                />
+            </div>
         </div>
     );
 };

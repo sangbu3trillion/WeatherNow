@@ -132,7 +132,7 @@ const WeatherReport = () => {
     //cityCode, time값이 존재하면 fetchReport 불러오는 방식 END
 
     return (
-        <div className="border-solid border-2 rounded-xl w-3/5 shadow-lg p-6">
+        <div className="border-solid border-2 rounded-xl shadow-lg p-6">
             <div className="mb-3">
                 <div className="font-gb font-bold text-xl text-center mb-2 ">기상특보 현황</div>
                 {report ? (
