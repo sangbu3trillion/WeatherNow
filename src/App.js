@@ -1,23 +1,24 @@
-import WrapPage from './components/FoodPage/WrapPage';
 import PlayList from './components/MusicPage/PlayList';
 import SideBar from './components/Utils/SideBar';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import WeatherMain from './components/WeatherPage/WeatherMain';
-import Loading from './components/Utils/Loading';
 import FoodMap from './components/FoodPage/FoodMap';
 
 function App() {
     return (
-        // <div className="flex items-center justify-center h-screen">
-        <div>
+        <div className="flex">
             <BrowserRouter>
-                <div className="flex h-auto p-16 m-auto shadow-lg max-w-7xl">
+                <div className="w-1/6 h-auto mt-20 ml-24">
                     <SideBar />
-                    <Routes>
-                        <Route path="/" element={<WeatherMain />} />
-                        <Route path="/food" element={<FoodMap />} />
-                        <Route path="/music" element={<PlayList />} />
-                    </Routes>
+                </div>
+                <div className="w-5/6">
+                    <div className="h-auto p-16 mr-32 shadow-lg max-w-7xl ">
+                        <Routes>
+                            <Route path="/" element={<WeatherMain />} />
+                            <Route path="/food" element={<FoodMap />} />
+                            <Route path="/music" element={<PlayList />} />
+                        </Routes>
+                    </div>
                 </div>
             </BrowserRouter>
         </div>

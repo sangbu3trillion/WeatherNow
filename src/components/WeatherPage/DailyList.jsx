@@ -20,7 +20,7 @@ export default function DailyList() {
     let month = temp.getMonth() + 1 < 10 ? '0' + (temp.getMonth() + 1) : temp.getMonth() + 1;
     let date = temp.getDate();
 
-    const {data, error, isLoading, isFetching, refetch} = useFetchWeatherQuery({
+    const {data, error, isLoading, isFetching} = useFetchWeatherQuery({
         x,
         y,
         numOfRows: 700,
@@ -31,26 +31,6 @@ export default function DailyList() {
     console.log(data, 'data');
     console.log(isLoading, 'isLoading');
     console.log(error, 'error');
-
-    //FIXME: dataPatch2()로 대체 (전역관리)
-    // async function dataPatch() {
-    //     const rs = dfs_xy_conv('toXY', x, y);
-    //     const res = await axios.get('/1360000/VilageFcstInfoService_2.0/getVilageFcst', {
-    //         params: {
-    //             serviceKey: 'c0ThfABkN/fAsmZROXef62eRVKB+yqalaUdIY9JGtNTDm+NqMwt52rHbVMAJIbe3DoZQN/mA/siPgjowhnGSnA==',
-    //             numOfRows: 700,
-    //             pageNo: 1,
-    //             base_date: baseDate,
-    //             base_time: baseTime + '00',
-    //             nx: Math.floor(rs.x),
-    //             ny: Math.floor(rs.y),
-    //             dataType: 'JSON',
-    //         },
-    //     });
-    //     console.log(res);
-
-    //     setWeather(cur => res.data.response.body.items.item);
-    // }
 
     function dataPatch2() {
         console.log(data, 'data');
@@ -123,14 +103,25 @@ export default function DailyList() {
     };
     console.log(isFetching, 'isFetching');
     console.log(isLoading, 'isLoading');
+
+    if (baseTime === null || baseDate === null || x === null || y === null) {
+        return <div>로딩중..</div>;
+    }
+    if (error) {
+        return <div>에러가 발생했습니다</div>;
+    }
+    if (!data) {
+        console.log('null');
+        return null;
+    }
     return (
         <>
-            {isLoading || !data || !baseDate || !baseTime ? (
+            {isLoading || isFetching || !data || !baseDate || !baseTime || !x || !y ? (
                 <Loading />
             ) : (
-                <div className="flex flex-col m-auto ">
+                <div className="flex flex-col my-auto ">
                     <div className="flex w-80">
-                        <p className="mr-2 text-2xl font-bold font-gb ">기온 및 날씨|</p>
+                        <p className="mr-2 text-2xl font-bold font-gb">기온 및 날씨|</p>
                         <p
                             className={`mr-1 ${today ? 'text-2xl' : 'text-xl'}  ${
                                 !today && 'text-gray-400'
