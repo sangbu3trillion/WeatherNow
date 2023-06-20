@@ -125,7 +125,7 @@ export default function DailyList() {
     console.log(isLoading, 'isLoading');
     return (
         <>
-            {isFetching || !data || !baseDate || !baseTime ? (
+            {isLoading || !data || !baseDate || !baseTime ? (
                 <Loading />
             ) : (
                 <div className="flex flex-col m-auto ">
