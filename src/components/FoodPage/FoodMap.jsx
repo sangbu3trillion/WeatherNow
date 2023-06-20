@@ -1,14 +1,11 @@
-import axios from 'axios';
 import React, {useEffect, useRef, useState} from 'react';
 import {Map, MapMarker} from 'react-kakao-maps-sdk';
 import FoodContents from './FoodContents';
-import TypingTest from './TypingTest';
 
 import {useFetchWeatherQuery, useFetchFoodQuery} from '../../store';
 import BasetimeCalc from '../Utils/BasetimeCalc';
 import {CheckWeather} from '../Utils/CheckWeather';
 import {FoodList} from '../Utils/FoodList';
-import FoodContents from './FoodContents';
 console.log(FoodList, 'FoodList');
 
 const FoodMap = () => {
@@ -67,47 +64,6 @@ const FoodMap = () => {
         }
         navigator.geolocation.getCurrentPosition(success, error);
     }
-
-    // const fetchUsers = async () => {
-    //     setUsers(null);
-
-    //     try {
-    //         const response = await axios.get(
-    //             'http://apis.data.go.kr/6260000/FoodService/getFoodKr?serviceKey=GSRcCYZGeievH8r6AdKyjzKx5dDFhx9Uyh9X9ieoqWEwe1alFjjcRtG5KiLxH7Ur313ypnBOPtpPD%2FR9m2hn0A%3D%3D&numOfRows=100&pageNo=1&resultType=json',
-    //         );
-
-    //         setUsers(response.data);
-
-    //         let test = response.data.getFoodKr.item.filter(e => e.RPRSNTV_MENU.includes('수육'));
-    //         let test2 = response.data.getFoodKr.item.filter(e => e.RPRSNTV_MENU.includes(FoodList[0][ret][1]));
-    //         let test3 = response.data.getFoodKr.item.filter(e => e.RPRSNTV_MENU.includes(FoodList[0][ret][2]));
-
-    //         console.log(test3, 'test3');
-    //         test = test.concat(test2);
-    //         test = test.concat(test3);
-    //         console.log(test, 'test');
-
-    //         const newPositions = test.map(item => ({
-    //             title: item.MAIN_TITLE,
-    //             latlng: {lat: item.LAT, lng: item.LNG},
-    //         }));
-
-    //         setPositions(newPositions);
-
-    //         const foodList = test.map(items => ({
-    //             picture: items.MAIN_IMG_THUMB,
-    //             title: items.MAIN_TITLE,
-    //             addr: items.ADDR1,
-    //             tel: items.CNTCT_TEL,
-    //             time: items.USAGE_DAY_WEEK_AND_TIME,
-    //             menu: items.RPRSNTV_MENU,
-    //             detail: items.ITEMCNTNTS,
-    //         }));
-    //         setInfo(foodList);
-    //     } catch (e) {
-    //         console.log(e);
-    //     }
-    // };
 
     useEffect(() => {
         init();
@@ -179,10 +135,10 @@ const FoodMap = () => {
     console.log(info, 'info');
     return (
         <div>
-            <div className="w-4/6 m-auto mt-14">
+            <div className=" mt-14">
                 <p className="mb-10 text-5xl font-bold font-gb ">Today Place</p>
             </div>
-            <div className="flex justify-center">
+            <div>
                 <Map
                     className="rounded-lg shadow-lg shadow-blue-500/50"
                     center={{lat: 35.1795543, lng: 129.0756416}}
@@ -211,33 +167,4 @@ const FoodMap = () => {
         </div>
     );
 };
-
-// const FoodContent1 = ({info}) => {
-//     return (
-//         <div className="flex justify-center w-4/6 m-auto mt-10 mb-14">
-//             <div className="w-3/4 mx-20 border rounded-lg h-96 border-slate-200">
-//                 <div className="flex">
-//                     <div>
-//                         <img className="w-64 h-40 mt-3 ml-3 rounded-lg" src={info.picture} />
-//                     </div>
-//                     <div className="flex">
-//                         <div className="mt-3 ml-4">
-//                             <div className="mt-3 mb-3 ">
-//                                 <p className="text-2xl font-semibold text-slate-500">{info.title}</p>
-//                             </div>
-//                             <p className="mb-2 font-mono text-lg">Address : {info.addr}</p>
-//                             <p className="mb-2 font-mono text-lg">Tel : {info.tel}</p>
-//                         </div>
-//                     </div>
-//                 </div>
-//                 <div className="mt-3 ml-4">
-//                     <p className="mb-2 font-mono text-lg">Time : {info.time}</p>
-//                     <p className="mb-2 font-mono text-lg">Menu : {info.menu}</p>
-//                     <p className="mb-2 font-mono text-lg">Detail : {info.detail}</p>
-//                 </div>
-//             </div>
-//         </div>
-//     );
-// };
-
 export default FoodMap;
