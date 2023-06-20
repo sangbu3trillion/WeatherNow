@@ -2,8 +2,9 @@ import axios from 'axios';
 import React, {useEffect, useState} from 'react';
 import {Map, MapMarker} from 'react-kakao-maps-sdk';
 import FoodContents from './FoodContents';
+import TypingTest from './TypingTest';
 
-const FoodMap = () => {
+const FoodMap = ({title}) => {
     const [users, setUsers] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -76,7 +77,9 @@ const FoodMap = () => {
                 }}
             />
             <div className="w-4/6 m-auto mt-14">
-                <p className="mb-10 font-gb font-bold text-5xl ">Today Place</p>
+                <p className="mb-10 font-gb font-bold text-5xl ">
+                    <TypingTest />
+                </p>
             </div>
             <div className="flex justify-center">
                 <Map
@@ -90,8 +93,8 @@ const FoodMap = () => {
                             key={`${position.title}-${position.latlng}`}
                             position={position.latlng}
                             image={{
-                                src: 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png',
-                                size: {width: 24, height: 35},
+                                src: `${process.env.PUBLIC_URL}/ci.png`,
+                                size: {width: 35, height: 45},
                             }}
                             title={position.title}
                             onClick={() => handleMarkerClick(position)}
