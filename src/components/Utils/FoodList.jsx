@@ -119,8 +119,6 @@ export const FoodList = [
             '라멘',
             '소바',
         ],
-    },
-    {
         cloud: [
             '샤브샤브',
             '삼겹살',
@@ -232,8 +230,6 @@ export const FoodList = [
             '히츠마부시',
             '갈치 구이',
         ],
-    },
-    {
         rain: [
             '샤브샤브',
             '삼겹살',
@@ -313,8 +309,6 @@ export const FoodList = [
             '마파두부',
             '갈치 구이',
         ],
-    },
-    {
         snow: [
             '돌솥',
             '오리훈제',

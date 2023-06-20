@@ -4,6 +4,7 @@ import SideBar from './components/Utils/SideBar';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import WeatherMain from './components/WeatherPage/WeatherMain';
 import Loading from './components/Utils/Loading';
+import FoodMap from './components/FoodPage/FoodMap';
 
 function App() {
     return (
@@ -14,12 +15,11 @@ function App() {
                     <SideBar />
                     <Routes>
                         <Route path="/" element={<WeatherMain />} />
-                        <Route path="/food" element={<WrapPage />} />
+                        <Route path="/food" element={<FoodMap />} />
                         <Route path="/music" element={<PlayList />} />
                     </Routes>
                 </div>
             </BrowserRouter>
-            {/* <Loading /> */}
         </div>
     );
 }

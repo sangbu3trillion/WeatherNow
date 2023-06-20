@@ -38,7 +38,7 @@ export default function SideBar() {
     //Handler END
 
     return (
-        <div>
+        <div className="mr-8">
             {/* sidebar navigation */}
             <div id="sidebar-section">
                 <div className="flex gap-5 ml-2 w-44">
@@ -107,12 +107,6 @@ export default function SideBar() {
                     </nav>
                 </div>
             </div>
-
-            {/* main content */}
-            {/* <div className="flex w-full">
-                <KakaoMap />
-                <WeatherInfo />
-            </div> */}
         </div>
     );
 }

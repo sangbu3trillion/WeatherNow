@@ -122,9 +122,10 @@ export default function DailyList() {
         setBaseDate(year.toString() + month.toString() + (date + 2).toString());
     };
     console.log(isFetching, 'isFetching');
+    console.log(isLoading, 'isLoading');
     return (
         <>
-            {isFetching || !data || !baseDate || !baseTime ? (
+            {isLoading || !data || !baseDate || !baseTime ? (
                 <Loading />
             ) : (
                 <div className="flex flex-col m-auto ">
@@ -213,7 +214,7 @@ export default function DailyList() {
                                                 <div className="ml-1 mr-4 text-2xl font-bold">{e.fcstValue + '°'}</div>
                                                 <div>
                                                     <img
-                                                        src={`resource/${CheckWeather(weather, e.fcstTime)}.gif`}
+                                                        src={`resource/${CheckWeather(weather, e.fcstTime, 1)}.gif`}
                                                         alt="클라우드"
                                                         className="w-8 h-8 mr-3"
                                                     ></img>
@@ -259,7 +260,7 @@ export default function DailyList() {
                                                 <div className="ml-1 mr-4 text-2xl font-bold">{e.fcstValue + '°'}</div>
                                                 <div>
                                                     <img
-                                                        src={`resource/${CheckWeather(weather, e.fcstTime)}.gif`}
+                                                        src={`resource/${CheckWeather(weather, e.fcstTime, 1)}.gif`}
                                                         alt="클라우드"
                                                         className="w-8 h-8 mr-3"
                                                     ></img>
