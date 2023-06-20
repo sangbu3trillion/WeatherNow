@@ -23,20 +23,20 @@ export const CheckWeather = (weather, weatherTime, flag) => {
 
         weather.map(e => {
             if (e.fcstTime === weatherTime && e.category === 'SKY' && e.fcstValue === '1') {
-                return (skyValue = 'sunny');
+                skyValue = 'sunny';
             }
             if (e.fcstTime === weatherTime && e.category === 'SKY' && e.fcstValue === '3') {
-                return (skyValue = 'cloudy');
+                skyValue = 'cloudy';
             }
             if (e.fcstTime === weatherTime && e.category === 'SKY' && e.fcstValue === '4') {
-                return (skyValue = 'blur');
+                skyValue = 'blur';
             }
             if (
                 e.fcstTime === weatherTime &&
                 e.category === 'PTY' &&
                 (e.fcstValue === '1' || e.fcstValue === '2' || e.fcstValue === '5')
             ) {
-                return (skyValue = 'rainny');
+                skyValue = 'rainny';
             }
         });
 
