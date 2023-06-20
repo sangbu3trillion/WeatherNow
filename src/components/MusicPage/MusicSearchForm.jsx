@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import axios from 'axios';
 import './css/search.css';
-import {useFetchWeatherQuery} from '../../store';
+import {useFetchFoodQuery, useFetchWeatherQuery} from '../../store';
 import {useEffect} from 'react';
 import BasetimeCalc from '../Utils/BasetimeCalc';
 import {CheckWeather} from '../Utils/CheckWeather';
@@ -19,6 +19,7 @@ export default function MusicSearchForm({token, onSearch}) {
     let month = temp.getMonth() + 1 < 10 ? '0' + (temp.getMonth() + 1) : temp.getMonth() + 1;
     let date = temp.getDate();
     let weather;
+    const foodData = useFetchFoodQuery();
     function init() {
         function success(pos) {
             const x = pos.coords.latitude;
@@ -79,16 +80,21 @@ export default function MusicSearchForm({token, onSearch}) {
     if (searchPerformed) {
         return null;
     }
-    if (weatherData.isLoading || baseTime === null || baseDate === null || x === null || y === null) {
+    if (
+        weatherData.isFetching ||
+        foodData.isFetching ||
+        baseTime === null ||
+        baseDate === null ||
+        x === null ||
+        y === null
+    ) {
         return <div>로딩중입니다</div>;
-    } else if (weatherData.error) {
+    } else if (weatherData.error || foodData.error) {
         return <div>에러가 발생했습니다</div>;
-    } else if (!weatherData.data) {
+    } else if (!weatherData.data || !foodData.data) {
         return null;
-    } else if (weatherData.data) {
-        console.log(weatherData.data, 'weatherData.data');
-        weather = weatherData.data.response.body.items.item;
     }
+    weather = weatherData.data.response.body.items.item;
     let fwth = weather.filter(e => {
         if (e.fcstTime === baseTime + '00' && (e.category === 'PTY' || e.category === 'SKY')) return true;
         return false;
