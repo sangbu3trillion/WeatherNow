@@ -27,11 +27,11 @@ const city_list = [
 ];
 
 const WeatherRepAndIdx = () => {
-    const [city, setCity] = useState(null);
-    const [uv, setUv] = useState(null);
-    const [air, setAir] = useState(null);
-    const [x, setX] = useState(null);
-    const [y, setY] = useState(null);
+    const [city, setCity] = useState(null); // 도시명 변수
+    const [uv, setUv] = useState(null); // 자외서지수 변수
+    const [air, setAir] = useState(null); // 대기정체지수 변수
+    const [lng, setLng] = useState(null); // 현재 x값(경도) 변수
+    const [lat, setLat] = useState(null); // 현재 y값(위도) 변수
 
     let time = new Date();
     let year = time.getFullYear();
@@ -46,8 +46,8 @@ const WeatherRepAndIdx = () => {
         function success(pos) {
             const x = pos.coords.longitude;
             const y = pos.coords.latitude;
-            setX(x);
-            setY(y);
+            setLng(x);
+            setLat(y);
         }
         navigator.geolocation.getCurrentPosition(success);
     }
@@ -62,7 +62,7 @@ const WeatherRepAndIdx = () => {
         console.log('[WeatherRepAndIdx]fetchCity CALLED!!');
 
         const city = await axios
-            .get(`https://dapi.kakao.com/v2/local/geo/coord2address.json?input_coord=WGS84&y=${y}&x=${x}`, {
+            .get(`https://dapi.kakao.com/v2/local/geo/coord2address.json?input_coord=WGS84&y=${lat}&x=${lng}`, {
                 headers: {Authorization: `KakaoAK 8a2e72241a0c6bdd460d4e3ba175136b`},
             })
             .then(city => {
@@ -75,14 +75,6 @@ const WeatherRepAndIdx = () => {
             });
     };
     //kakao api를 이용하여 위도 경도에 해당하는 현재 도시를 가져오는 함수 END
-
-    //x, y값이 존재하면 fetchCity를 불러오는 방식 START
-    useEffect(() => {
-        if (x && y) {
-            fetchCity();
-        }
-    }, [x, y]);
-    //x, y값이 존재하면 fetchCity를 불러오는 방식 END
 
     // city_list에 있는 value를가져오기 위한 코드 START
     const getCityCode = city => {
@@ -131,14 +123,6 @@ const WeatherRepAndIdx = () => {
 
     // 자외선 API를 가져오는 axios 코드 END
 
-    //cityCode값이 존재하면 fetchUv 불러오는 방식 START
-    useEffect(() => {
-        if (cityCode) {
-            fetchUv();
-        }
-    }, [cur_time, cityCode]);
-    //cityCode값이 존재하면 fetchUv 불러오는 방식 END
-
     // 대기확산지수 API를 가져오는 axios 코드 START
 
     const fetchAir = async () => {
@@ -155,8 +139,6 @@ const WeatherRepAndIdx = () => {
                 },
             })
             .then(air_res => {
-                // .then은 get으로 가져오면, 그 다음에 가져온 데이터로 다음과 같이 처리하라는 의미
-                // 통신이 왔다 갔다 하면 성공으로 본다.(제대로 데이터를 못 받아도)
                 console.log('success!!'); // 그래서 원래 데이터를 받는 검수과정이 들어 가야 한다.
                 console.log('대기확산지수', air_res.data.response.body.items.item[0]);
                 setAir(air_res.data.response.body.items.item[0]);
@@ -168,13 +150,22 @@ const WeatherRepAndIdx = () => {
 
     // 대기확산지수 API를 가져오는 axios 코드 END
 
-    //cityCode값이 존재하면 fetchAir 불러오는 방식 START
+    //lng, lat값이 존재하면 fetchCity를 불러오는 방식 START
+    useEffect(() => {
+        if (lng && lat) {
+            fetchCity();
+        }
+    }, [lng, lat]);
+    //lng, lat값이 존재하면 fetchCity를 불러오는 방식 END
+
+    //cur_time, cityCode값이 존재하면 fetchUv, fetchAir 불러오는 방식 START
     useEffect(() => {
         if (cityCode) {
+            fetchUv();
             fetchAir();
         }
     }, [cur_time, cityCode]);
-    //cityCode값이 존재하면 fetchAir 불러오는 방식 END
+    //cur_time, cityCode값이 존재하면 fetchUv, fetchAir 불러오는 방식 END
 
     return (
         <div className="border-solid border-2 rounded-xl w-56 shadow-lg p-6 text-center">

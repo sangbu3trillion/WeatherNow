@@ -23,7 +23,6 @@ const city_list = [
 
 const WeatherReport = () => {
     const [report, setReport] = useState();
-    const [reportDetail, setReportDetail] = useState();
     const [x, setX] = useState();
     const [y, setY] = useState();
     const [city, setCity] = useState();
