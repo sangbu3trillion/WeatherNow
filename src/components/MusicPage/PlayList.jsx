@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import MusicLoginButton from './MusicLoginButton';
 import MusicSearchForm from './MusicSearchForm';
-import MusicTrackItem from './MusicTrackItem';
 import {setClientToken} from './Spotify';
-import VerticalCardSlider from './VerticalCardSlider';
+import MusicTrackItem from './MusicTrackItem';
 
 export default function Music() {
     const [playlist, setPlaylist] = useState([]);
@@ -40,6 +39,7 @@ export default function Music() {
     };
 
     const renderMusic = () => {
+        // return playlist.map(track => <MusicTrackItem key={track.album.id} track={track} />);
         return playlist.map(track => <MusicTrackItem key={track.album.id} track={track} />);
     };
 

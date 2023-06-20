@@ -1,8 +1,10 @@
 import {useState} from 'react';
 import axios from 'axios';
+import './css/search.css';
 
 export default function MusicSearchForm({token, onSearch}) {
     const [searchKey, setSearchKey] = useState('');
+    const [searchPerformed, setSearchPerformed] = useState(false);
 
     const searchMusic = async e => {
         e.preventDefault();
@@ -18,17 +20,31 @@ export default function MusicSearchForm({token, onSearch}) {
             });
 
             onSearch(data.tracks.items);
+            setSearchPerformed(true); // Set the searchPerformed state to true
         } catch (error) {
             console.error(error);
         }
     };
 
+    if (searchPerformed) {
+        return null;
+    }
+
     return (
-        <form onSubmit={searchMusic}>
-            <input type="text" onChange={e => setSearchKey(e.target.value)} />에 울리는 노래 추천해 드릴게요 !
-            <button className="m-10 bg-sky-200" type={'submit'}>
-                Search
-            </button>
-        </form>
+        <div className="start-screen">
+            <ul>
+                <li>
+                    <h1>오늘 날씨에 맞는 노래를 추천해드릴게요</h1>
+                </li>
+                <li>
+                    <form onSubmit={searchMusic} className="mt-6">
+                        <input type="text" onChange={e => setSearchKey(e.target.value)} />
+                        <button className="bg-sky-200 p-4 rounded-2xl" type={'submit'}>
+                            Search
+                        </button>
+                    </form>
+                </li>
+            </ul>
+        </div>
     );
 }
