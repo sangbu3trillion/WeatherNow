@@ -3,6 +3,7 @@ import {dfs_xy_conv} from '../../components/Utils/XYtranselate';
 
 const weatherApi = createApi({
     reducerPath: 'weather',
+    keepUnusedDataFor: 600,
     baseQuery: fetchBaseQuery({
         baseUrl: 'http://localhost:3000',
     }),
@@ -13,8 +14,8 @@ const weatherApi = createApi({
                     return {
                         url: 'https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst',
                         params: {
-                            serviceKey: weather.serviceKey,
-                            numOfRows: 700,
+                            serviceKey: process.env.REACT_APP_WEATHER_API,
+                            numOfRows: weather.numOfRows,
                             pageNo: 1,
                             base_date: weather.baseDate,
                             base_time: '0200',

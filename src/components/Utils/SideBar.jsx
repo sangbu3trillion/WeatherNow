@@ -1,6 +1,5 @@
 import React from 'react';
-import WeatherInfo from '../WeatherPage/WeatherInfo';
-import KakaoMap from '../WeatherPage/KakaoMap';
+
 import {Link} from 'react-router-dom';
 
 const WEATHER_i = '1';
@@ -39,7 +38,7 @@ export default function SideBar() {
     //Handler END
 
     return (
-        <div>
+        <div className="mr-8">
             {/* sidebar navigation */}
             <div id="sidebar-section">
                 <div className="flex gap-5 ml-2 w-44">
@@ -55,25 +54,30 @@ export default function SideBar() {
                         <div className="relative mt-5 mb-5 overflow-hidden">
                             <ul className="space-y-8 nav-list mb-14" id="nav-list">
                                 <li className="flex gap-5 p-2 text-xl text-white cursor-pointer nav-item active rounded-l-xl mb-7 hover:text-gray-400 ">
-                                    <button
-                                        onClick={sideBtnClickHandler}
-                                        name={WEATHER_i}
-                                        className="fas fa-sun fa-2x"
-                                    ></button>
+                                    <Link to="/">
+                                        <button
+                                            onClick={sideBtnClickHandler}
+                                            name={WEATHER_i}
+                                            className="fas fa-sun fa-2x"
+                                        ></button>
+                                    </Link>
                                     <button
                                         onClick={sideBtnClickHandler}
                                         name={WEATHER_p}
                                         className="text-2xl font-bold font-gb"
                                     >
-                                        <Link to="/"> weather</Link>
+                                        <Link to="/"> 날씨</Link>
                                     </button>
                                 </li>
                                 <li className="flex gap-5 p-2 text-xl text-white cursor-pointer nav-item rounded-l-xl my-7 hover:text-gray-400">
-                                    <button
-                                        onClick={sideBtnClickHandler}
-                                        name={STYLE_i}
-                                        className="fas fa-user fa-2x"
-                                    ></button>
+                                    <Link to="/food">
+                                        <button
+                                            onClick={sideBtnClickHandler}
+                                            name={STYLE_i}
+                                            className="fas fa-user fa-2x"
+                                        ></button>
+                                    </Link>
+
                                     <button
                                         onClick={sideBtnClickHandler}
                                         name={STYLE_p}
@@ -83,17 +87,19 @@ export default function SideBar() {
                                     </button>
                                 </li>
                                 <li className="flex gap-5 p-2 text-xl text-white cursor-pointer nav-item rounded-l-xl my-7 hover:text-gray-400">
-                                    <button
-                                        onClick={sideBtnClickHandler}
-                                        name={MUSIC_i}
-                                        className="fas fa-headphones fa-2x"
-                                    ></button>
+                                    <Link to="/music">
+                                        <button
+                                            onClick={sideBtnClickHandler}
+                                            name={MUSIC_i}
+                                            className="fas fa-headphones fa-2x"
+                                        ></button>
+                                    </Link>
                                     <button
                                         onClick={sideBtnClickHandler}
                                         name={MUSIC_p}
                                         className="text-2xl font-bold font-gb"
                                     >
-                                        music
+                                        <Link to="/music">음악</Link>
                                     </button>
                                 </li>
                             </ul>
@@ -101,12 +107,6 @@ export default function SideBar() {
                     </nav>
                 </div>
             </div>
-
-            {/* main content */}
-            {/* <div className="flex w-full">
-                <KakaoMap />
-                <WeatherInfo />
-            </div> */}
         </div>
     );
 }
