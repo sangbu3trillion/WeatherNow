@@ -4,7 +4,7 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import WeatherMain from './components/WeatherPage/WeatherMain';
 import FoodMap from './components/FoodPage/FoodMap';
 import BasetimeCalc from './components/Utils/BasetimeCalc';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {useFetchWeatherQuery} from './store';
 import {CheckWeather} from './components/Utils/CheckWeather';
 
@@ -79,17 +79,21 @@ function App() {
             let backgroundImageUrl = '';
 
             switch (ret) {
-                case 'A':
+                case 'rain':
                     backgroundImageUrl = `${process.env.PUBLIC_URL}/rain.jpg`;
                     break;
-                case 'B':
+                case 'snow':
                     backgroundImageUrl = `${process.env.PUBLIC_URL}/snow.jpg`;
                     break;
-                case 'C':
+                case 'sunny':
                     backgroundImageUrl = `${process.env.PUBLIC_URL}/sunny.blur.png`;
                     break;
+                case 'cloud':
+                    backgroundImageUrl = `${process.env.PUBLIC_URL}/cloud.jpg`;
+                    break;
                 default:
-                    backgroundImageUrl = `${process.env.PUBLIC_URL}/cloud.jpg`; // ret 값이 어떤 case에도 해당하지 않으면 기본 이미지 적용
+                    backgroundImageUrl = `${process.env.PUBLIC_URL}/sunny.blur.png`;
+                    break;
             }
 
             setBackgroundImage(`url(${backgroundImageUrl})`);
@@ -101,30 +105,35 @@ function App() {
     }
 
     return (
-        <div className="flex relative">
-            <div
-                className="absolute inset-0 bg-no-repeat opacity-25 z-[-1]"
-                style={{
-                    backgroundImage: backgroundImage,
-                    backgroundSize: 'cover',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundPosition: 'top',
-                }}
-            ></div>
-            <BrowserRouter>
-                <div className="w-1/6 h-auto mt-20 ml-24">
-                    <SideBar />
-                </div>
-                <div className="w-5/6">
-                    <div className="h-auto mr-32 p-16  max-w-7xl ">
-                        <Routes>
-                            <Route path="/" element={<WeatherMain />} />
-                            <Route path="/food" element={<FoodMap />} />
-                            <Route path="/music" element={<PlayList />} />
-                        </Routes>
+        <div>
+            <div className="relative flex">
+                <div
+                    className="absolute inset-0 bg-no-repeat opacity-25 z-[-1] align-bottom m-0 p-0"
+                    style={{
+                        backgroundImage: backgroundImage,
+                        backgroundSize: 'cover',
+                        backgroundRepeat: 'no-repeat',
+                        backgroundPosition: 'top',
+                    }}
+                ></div>
+                <BrowserRouter>
+                    {/* <div className="w-1/6 h-auto mt-20 ml-64"> */}
+                    <div className="w-2/12 h-auto mt-20 ml-48">
+                        <SideBar />
                     </div>
-                </div>
-            </BrowserRouter>
+                    <div className="w-10/12  text-neutral-700">
+                        <div className="p-16 max-w-7xl">
+                            {/* h-auto  */}
+                            <Routes>
+                                <Route path="/" element={<WeatherMain />} />
+                                <Route path="/food" element={<FoodMap />} />
+                                <Route path="/music" element={<PlayList />} />
+                            </Routes>
+                        </div>
+                    </div>
+                </BrowserRouter>
+            </div>
+            {/* <div className="bg-white">이야이야오</div> */}
         </div>
     );
 }

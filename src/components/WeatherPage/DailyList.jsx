@@ -101,6 +101,7 @@ export default function DailyList() {
         setAfterTommorow(true);
         // setBaseDate(year.toString() + month.toString() + (date + 2).toString());
     };
+
     console.log(weatherData.isFetching, 'isFetching');
     console.log(weatherData.isLoading, 'isLoading');
 
@@ -166,7 +167,12 @@ export default function DailyList() {
                                             <div className="ml-1 mr-4 text-2xl font-bold">{e.fcstValue + '°'}</div>
                                             <div>
                                                 <img
-                                                    src={`resource/${CheckWeather(weather, e.fcstTime, 1)}.gif`}
+                                                    src={`resource/${CheckWeather(
+                                                        weather,
+                                                        e.fcstTime,
+                                                        1,
+                                                        e.baseDate,
+                                                    )}.gif`}
                                                     alt="클라우드"
                                                     className="w-8 h-8 mr-3"
                                                 ></img>
@@ -205,7 +211,12 @@ export default function DailyList() {
                                             <div className="ml-1 mr-4 text-2xl font-bold">{e.fcstValue + '°'}</div>
                                             <div>
                                                 <img
-                                                    src={`resource/${CheckWeather(weather, e.fcstTime, 1)}.gif`}
+                                                    src={`resource/${CheckWeather(
+                                                        weather,
+                                                        e.fcstTime,
+                                                        1,
+                                                        year.toString() + month.toString() + (date + 1).toString(),
+                                                    )}.gif`}
                                                     alt="클라우드"
                                                     className="w-8 h-8 mr-3"
                                                 ></img>
@@ -245,7 +256,12 @@ export default function DailyList() {
                                             <div className="ml-1 mr-4 text-2xl font-bold">{e.fcstValue + '°'}</div>
                                             <div>
                                                 <img
-                                                    src={`resource/${CheckWeather(weather, e.fcstTime, 1)}.gif`}
+                                                    src={`resource/${CheckWeather(
+                                                        weather,
+                                                        e.fcstTime,
+                                                        1,
+                                                        year.toString() + month.toString() + (date + 2).toString(),
+                                                    )}.gif`}
                                                     alt="클라우드"
                                                     className="w-8 h-8 mr-3"
                                                 ></img>
