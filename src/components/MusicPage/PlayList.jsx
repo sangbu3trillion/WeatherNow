@@ -44,17 +44,23 @@ export default function Music() {
     };
 
     return (
-        <div className="my-0 -ml-16 w-full h-screen mt-[158px]">
-            <div>
-                <p className="font-bold text-5xl my-10 text-left">Today Music</p>
-            </div>
-            <div className="mb-7 mt-14">
-                <MusicLoginButton token={token} onClickLogout={logout} />
-            </div>
-            <MusicSearchForm token={token} onSearch={searchMusic} />
-            <div className="h-full">
-                <script src="https://sdk.scdn.co/spotify-player.js"></script>
-                <ul className="grid place-items-center">{renderMusic()}</ul>
+        <div className="my-0 -ml-24 mt-[144px]">
+            {/* 차트 나오기 전에는 h-screen 차트가 나오고 나서는 h-full */}
+            <div className="pl-7 pr-5 pt-2 pb-10 rounded-xl bg-slate-100/50">
+                {/* bg-white/50 */}
+                <div>
+                    <p className="font-bold text-5xl my-10 text-left">Today Music</p>
+                </div>
+                <div className="mb-10 mt-14 text-right mr-10 ">
+                    <MusicLoginButton token={token} onClickLogout={logout} />
+                </div>
+                <div>
+                    <MusicSearchForm token={token} onSearch={searchMusic} />
+                </div>
+                <div>
+                    <script src="https://sdk.scdn.co/spotify-player.js"></script>
+                    <ul className="grid place-items-center">{renderMusic()}</ul>
+                </div>
             </div>
         </div>
     );

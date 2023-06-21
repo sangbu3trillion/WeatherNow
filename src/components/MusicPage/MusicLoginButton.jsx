@@ -33,7 +33,7 @@ export default function MusicLoginButton({token, onClickLogout}) {
         );
     } else {
         return (
-            <button onClick={onClickLogout} className="hover:text-blue-300 text-2xl">
+            <button onClick={onClickLogout} className="hover:text-blue-300 text-2xl ">
                 <i className="fas fa-right-from-bracket"></i>
                 &nbsp;
                 <span className="font-suit"> logout</span>

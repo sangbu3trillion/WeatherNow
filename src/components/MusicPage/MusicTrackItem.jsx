@@ -18,8 +18,8 @@ const MusicTrackItem = ({track}) => {
     }, []);
 
     // 재생 정지 버튼 클릭
-    const playIcon = <i className="p-3 text-sky-200 fas fa-play hover:text-sky-300 text-3xl"></i>;
-    const pauseIcon = <i className="p-3 text-sky-200 fas fa-stop hover:text-sky-300 text-3xl"></i>;
+    const playIcon = <i className="p-3 text-white fas fa-play hover:text-sky-300 text-3xl"></i>;
+    const pauseIcon = <i className="p-3 text-white fas fa-stop hover:text-red-500 text-3xl"></i>;
 
     const togglePlay = () => {
         if (isPlaying) {
@@ -46,7 +46,7 @@ const MusicTrackItem = ({track}) => {
     };
 
     return (
-        <div key={track.album.id}>
+        <div key={track.album.id} className="w-full">
             <ul className="border-b divide-y divide-slate-200">
                 <li className="p-3 cursor-pointer hover:bg-gray-100/90 grid grid-cols-5" onClick={() => track.uri}>
                     <div className="col-start-1 col-end-1 grid place-items-center">
@@ -63,16 +63,17 @@ const MusicTrackItem = ({track}) => {
                     <div className="col-start-4 col-end-5 my-auto">
                         <p className="text-xl text-gray-500">{track.album.name}</p>
                     </div>
-                    <div className="mx-20 my-auto col-start-5 col-end-6">
+                    <div className="mx-20 my-auto col-start-5 col-end-6 text-center">
                         <button onClick={togglePlay} className="icon-button">
                             {isPlaying ? pauseIcon : playIcon}
                         </button>
                         <div className="relative">
-                            <div className="overflow-hidden h-2 w-14 bg-slate-200">
+                            <div className="overflow-hidden h-2 w-20 bg-white/70 rounded-xl">
                                 <div
-                                    className="bg-gradient-to-r from-sky-200 to-indigo-300 h-full transform"
+                                    className="bg-gradient-to-r bg-red-500 h-full transform text-"
                                     style={{width: `${calculateProgress()}%`}}
                                 ></div>
+                                {/*  from-sky-200 to-indigo-300  */}
                             </div>
                         </div>
                     </div>

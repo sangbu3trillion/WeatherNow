@@ -36,12 +36,12 @@ const Clock = () => {
 
     return (
         <>
-            <div className="border-2 p-5 w-50 rounded-md">
+            <div className="border-2 p-5 w-50 rounded-md ">
                 <div className="text-center">
-                    <p className="font-gb font-bold">{`${month}/${date}/${days[day]}`} </p>
+                    <p className="font-suit font-bold">{`${month}/${date}/${days[day]}`} </p>
                 </div>
                 <div className="text-center">
-                    <p className="font-gb">{`${
+                    <p className="font-suit">{`${
                         (hour < 12 ? 'A' : 'P') + 'M' + ' ' + (hour % 12 || 12)
                     } : ${minute}`}</p>
                 </div>

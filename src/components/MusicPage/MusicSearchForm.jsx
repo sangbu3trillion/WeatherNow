@@ -109,9 +109,10 @@ export default function MusicSearchForm({token, onSearch}) {
     else if (ret === 'rain') ret += ' 비 흐림';
     else if (ret === 'snow') ret += ' 눈 흐림';
     else if (ret === 'sun') ret += ' 맑음 피크닉';
+
     return (
         <div className="start-screen">
-            <ul>
+            <ul className="text-center">
                 <li>
                     <h1 className="font-gb">오늘 날씨에 맞는 노래를 추천해드릴게요</h1>
                 </li>
