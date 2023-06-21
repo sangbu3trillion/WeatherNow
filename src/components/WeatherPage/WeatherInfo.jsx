@@ -70,7 +70,6 @@ const WeatherInfo = ({weather, skyValue, t, maxTemp, minTemp, reh}) => {
     //lng, lat값이 존재하면 fetchCity를 불러오는 방식 END
 
     return (
-<<<<<<< Updated upstream
         <div className="bg-white border-2 border-solid shadow-lg rounded-xl w-80 h-55 p-7 opacity-85">
             <div className="flex current_temp_and_img">
                 <div className="text-4xl font-bold font-gb">{t}°</div>
@@ -78,7 +77,6 @@ const WeatherInfo = ({weather, skyValue, t, maxTemp, minTemp, reh}) => {
                 <div className="ml-1 ">
                     <img className="object-contain h-8 w-14" src={`resource/${skyValue}.gif`} />
                 </div>
-=======
         <div className=" rounded-xl w-80 h-55 shadow-lg p-7 bg-white opacity-85">
             {/* border-solid border-2 */}
             <div className="current_temp_and_img flex">
@@ -104,7 +102,6 @@ const WeatherInfo = ({weather, skyValue, t, maxTemp, minTemp, reh}) => {
                         <img className="object-contain w-20 h-20 " src={LoadingImg} />
                     </div>
                 )}
->>>>>>> Stashed changes
             </div>
 
             <div className="mb-3">
