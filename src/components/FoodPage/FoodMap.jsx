@@ -91,6 +91,8 @@ const FoodMap = () => {
         return <div>로딩중..</div>;
     }
     if (weatherData.error || foodData.error) {
+        weatherData.refetch();
+        foodData.refetch();
         return <div>에러가 발생했습니다</div>;
     }
     if (!weatherData.data || !foodData.data) {
@@ -135,9 +137,10 @@ const FoodMap = () => {
 
     console.log(newPositions, 'newPositions');
     console.log(info, 'info');
+
     return (
-        <div>
-            <div className=" mt-14">
+        <div className="h-screen">
+            <div className="w-4/6 m-auto mt-14">
                 <p className="mb-10 text-5xl font-bold font-gb ">Today Place</p>
             </div>
             <div>
