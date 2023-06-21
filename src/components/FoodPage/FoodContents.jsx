@@ -6,8 +6,8 @@ const FoodContents = ({info, marker, positions}) => {
     const infoItems = info.filter(e => (e.title === marker.title ? true : false));
     console.log(infoItems, 'info');
     return (
-        <div className="flex justify-center w-4/6 m-auto mt-10 mb-14 ">
-            <div className="w-3/4 h-auto mx-20 bg-white border rounded-lg border-slate-200">
+        <div className=" mt-10 mb-14 ">
+            <div className="w-3/4 h-auto mx-20 border rounded-lg bg-sky-200">
                 <div className="flex">
                     <div>
                         <img className="w-64 h-40 mt-3 ml-3 rounded-lg" src={infoItems[0].picture} alt="infoPicture" />

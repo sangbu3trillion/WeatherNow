@@ -105,14 +105,14 @@ function App() {
             <div
                 className="absolute inset-0 bg-no-repeat opacity-25 z-[-1]"
                 style={{
-                    backgroundImage: `url(${process.env.PUBLIC_URL}/rain.jpg)`,
+                    backgroundImage: backgroundImage,
                     backgroundSize: 'cover',
                     backgroundRepeat: 'no-repeat',
                     backgroundPosition: 'top',
                 }}
             ></div>
             <BrowserRouter>
-                <div className="w-1/6 h-auto mt-16 ml-24">
+                <div className="w-1/6 h-auto mt-20 ml-24">
                     <SideBar />
                 </div>
                 <div className="w-5/6">

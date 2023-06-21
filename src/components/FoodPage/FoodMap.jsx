@@ -18,7 +18,7 @@ const FoodMap = () => {
     const [y, setY] = useState(null);
     const [baseTime, setBasetime] = useState(null);
     const [baseDate, setBaseDate] = useState(null);
-    const clickRef = useRef();
+
     let temp = new Date();
     let hour = temp.getHours();
     let year = temp.getFullYear();
@@ -26,19 +26,21 @@ const FoodMap = () => {
     let date = temp.getDate();
 
     const weatherData = useFetchWeatherQuery({
+        //날씨 데이터 가져오기
         x,
         y,
-        numOfRows: 253,
+        numOfRows: 253, //날씨데이터 253개 , 1시간에 6개, 새벽3시부터 00시
         baseDate,
         baseTime: baseTime + '00',
     });
 
-    const foodData = useFetchFoodQuery();
+    const foodData = useFetchFoodQuery(); //음식 데이터 가져오기
 
     console.log(weatherData.data, 'data');
     console.log(foodData.data, 'foodData');
 
     function init() {
+        //위치정보 가져오기, 위도경도 가져오기
         function success(pos) {
             const x = pos.coords.latitude;
             const y = pos.coords.longitude;
@@ -62,7 +64,7 @@ const FoodMap = () => {
         function error(err) {
             console.log(err);
         }
-        navigator.geolocation.getCurrentPosition(success, error);
+        navigator.geolocation.getCurrentPosition(success, error); //사용자의 현재위치
     }
 
     useEffect(() => {
@@ -98,10 +100,10 @@ const FoodMap = () => {
         return null;
     }
 
-    const weather = weatherData.data.response.body.items.item;
+    const weather = weatherData.data.response.body.items.item; //날씨 데이터
 
     let fwth = weather.filter(e => {
-        if (e.fcstTime === baseTime + '00' && (e.category === 'PTY' || e.category === 'SKY')) return true;
+        if (e.fcstTime === baseTime + '00' && (e.category === 'PTY' || e.category === 'SKY')) return true; //PTY강수형태, SKY 하늘의 상태
         return false;
     });
 
@@ -141,7 +143,7 @@ const FoodMap = () => {
             <div className="w-4/6 m-auto mt-14">
                 <p className="mb-10 text-5xl font-bold font-gb ">Today Place</p>
             </div>
-            <div className="flex justify-center">
+            <div>
                 <Map
                     className="rounded-lg shadow-lg shadow-blue-500/50"
                     center={{lat: 35.1795543, lng: 129.0756416}}
@@ -156,7 +158,6 @@ const FoodMap = () => {
                                 src: `${process.env.PUBLIC_URL}/ci.png`,
                                 size: {width: 35, height: 45},
                             }}
-                            ref={clickRef}
                             title={position.title}
                             onClick={() => handleMarkerClick(position)}
                         />
@@ -170,33 +171,4 @@ const FoodMap = () => {
         </div>
     );
 };
-
-// const FoodContent1 = ({info}) => {
-//     return (
-//         <div className="flex justify-center w-4/6 m-auto mt-10 mb-14">
-//             <div className="w-3/4 mx-20 border rounded-lg h-96 border-slate-200">
-//                 <div className="flex">
-//                     <div>
-//                         <img className="w-64 h-40 mt-3 ml-3 rounded-lg" src={info.picture} />
-//                     </div>
-//                     <div className="flex">
-//                         <div className="mt-3 ml-4">
-//                             <div className="mt-3 mb-3 ">
-//                                 <p className="text-2xl font-semibold text-slate-500">{info.title}</p>
-//                             </div>
-//                             <p className="mb-2 font-mono text-lg">Address : {info.addr}</p>
-//                             <p className="mb-2 font-mono text-lg">Tel : {info.tel}</p>
-//                         </div>
-//                     </div>
-//                 </div>
-//                 <div className="mt-3 ml-4">
-//                     <p className="mb-2 font-mono text-lg">Time : {info.time}</p>
-//                     <p className="mb-2 font-mono text-lg">Menu : {info.menu}</p>
-//                     <p className="mb-2 font-mono text-lg">Detail : {info.detail}</p>
-//                 </div>
-//             </div>
-//         </div>
-//     );
-// };
-
 export default FoodMap;

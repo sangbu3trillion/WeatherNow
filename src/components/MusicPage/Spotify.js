@@ -9,6 +9,8 @@ export const loginEndpoint = `${authEndpoint}client_id=${clientID}&redirect_uri=
     '%20',
 )}&response_type=token&show_dialog=true`;
 
+console.log(loginEndpoint);
+
 const apiClinet = axios.create({
     baseURL: 'https://api.spotify.com/v1',
 });
