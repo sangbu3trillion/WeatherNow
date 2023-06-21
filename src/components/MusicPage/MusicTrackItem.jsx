@@ -1,21 +1,49 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 const MusicTrackItem = ({track}) => {
     const [isPlaying, setIsPlaying] = useState(false);
+    const [currentTime, setCurrentTime] = useState(0);
     const audioRef = React.useRef(new Audio(track.preview_url));
+
+    useEffect(() => {
+        const updateTime = () => {
+            setCurrentTime(audioRef.current.currentTime);
+        };
+
+        audioRef.current.addEventListener('timeupdate', updateTime);
+
+        return () => {
+            audioRef.current.removeEventListener('timeupdate', updateTime);
+        };
+    }, []);
+
+    // 재생 정지 버튼 클릭
+    const playIcon = <i className="p-3 text-sky-200 fas fa-play hover:text-sky-300 text-3xl"></i>;
+    const pauseIcon = <i className="p-3 text-sky-200 fas fa-stop hover:text-sky-300 text-3xl"></i>;
 
     const togglePlay = () => {
         if (isPlaying) {
             audioRef.current.pause();
+            setIsPlaying(false);
         } else {
             audioRef.current.play();
+            setIsPlaying(true);
         }
-        setIsPlaying(!isPlaying);
     };
 
-    // 정지, 재생 아이콘
-    const playIcon = <i className="p-3 text-sky-200 fas fa-play  hover:text-sky-300 text-3xl"></i>;
-    const pauseIcon = <i className="p-3  text-sky-200 fas fa-stop  hover:text-sky-300 text-3xl"></i>;
+    // 음악 상태 바
+    const calculateProgress = () => {
+        if (audioRef.current && audioRef.current.duration) {
+            const progress = (currentTime / audioRef.current.duration) * 100;
+            if (progress >= 100 && isPlaying == true) {
+                audioRef.current.currentTime = 0;
+                setIsPlaying(false); //무한루프 빠짐 -> && isPlaying == true
+                return 0;
+            }
+            return progress;
+        }
+        return 0;
+    };
 
     return (
         <div key={track.album.id}>
@@ -36,9 +64,17 @@ const MusicTrackItem = ({track}) => {
                         <p className="text-xl text-gray-500">{track.album.name}</p>
                     </div>
                     <div className="mx-20 my-auto col-start-5 col-end-6">
-                        <button onClick={togglePlay} className="icon-button ">
+                        <button onClick={togglePlay} className="icon-button">
                             {isPlaying ? pauseIcon : playIcon}
                         </button>
+                        <div className="relative">
+                            <div className="overflow-hidden h-2 w-14 bg-slate-200">
+                                <div
+                                    className="bg-gradient-to-r from-sky-200 to-indigo-300 h-full transform"
+                                    style={{width: `${calculateProgress()}%`}}
+                                ></div>
+                            </div>
+                        </div>
                     </div>
                 </li>
             </ul>
