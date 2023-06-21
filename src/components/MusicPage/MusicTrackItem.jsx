@@ -34,10 +34,10 @@ const MusicTrackItem = ({track}) => {
     // 음악 상태 바
     const calculateProgress = () => {
         if (audioRef.current && audioRef.current.duration) {
-            console.log('dfdfd');
             const progress = (currentTime / audioRef.current.duration) * 100;
-            if (progress >= 100) {
+            if (progress >= 100 && isPlaying == true) {
                 audioRef.current.currentTime = 0;
+                setIsPlaying(false); //무한루프 빠짐 -> && isPlaying == true
                 return 0;
             }
             return progress;
