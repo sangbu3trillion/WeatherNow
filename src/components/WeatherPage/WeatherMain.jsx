@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import SideBar from '../Utils/SideBar';
 import KakaoMap from './KakaoMap';
 import WeatherInfo from './WeatherInfo';
@@ -6,11 +6,62 @@ import DailyList from './DailyList';
 import WeatherRepAndIdx from './WeatherRepAndIdx';
 import WeatherRadar from './WeatherSatellite';
 import WeatherReport from './WeatherReport';
-
+import {useFetchWeatherQuery} from '../../store';
+import BasetimeCalc from '../Utils/BasetimeCalc';
 const WeatherMain = () => {
+    const [x, setX] = useState(null);
+    const [y, setY] = useState(null);
+    const [baseDate, setBaseDate] = useState(null);
+    const [baseTime, setBaseTime] = useState(null);
+
+    let temp = new Date();
+    let hour = temp.getHours();
+
+    let year = temp.getFullYear();
+    let month = temp.getMonth() + 1 < 10 ? '0' + (temp.getMonth() + 1) : temp.getMonth() + 1;
+    let date = temp.getDate();
+    const weatherData = useFetchWeatherQuery({
+        x,
+        y,
+        numOfRows: 700,
+        baseDate,
+        baseTime: baseTime + '00',
+    });
+    function init() {
+        function success(pos) {
+            const x = pos.coords.latitude;
+            const y = pos.coords.longitude;
+
+            setBaseTime(BasetimeCalc(hour).baseTime);
+
+            if (BasetimeCalc(hour).flag === true) {
+                console.log('flag true');
+                date = date - 1;
+                console.log(date, '55');
+                date < 10
+                    ? setBaseDate(year.toString() + month.toString() + '0' + date.toString())
+                    : setBaseDate(year.toString() + month.toString() + date.toString());
+            } else {
+                setBaseDate(year.toString() + month.toString() + date.toString());
+            }
+            setX(x);
+            setY(y);
+        }
+
+        function error(err) {
+            console.log(err);
+        }
+        navigator.geolocation.getCurrentPosition(success, error);
+    }
+    useEffect(() => {
+        init();
+    }, []);
+    if (weatherData.isLoading) return <div>로딩중...</div>;
+    if (weatherData.isError) return <div>에러발생</div>;
+    if (!weatherData.data) return <div>데이터 없음</div>;
     return (
         <div className="flex flex-col justify-center w-full">
-            <div className="flex  justify-between">
+            <div className="flex justify-between">
                 <KakaoMap />
                 <WeatherInfo />
                 <WeatherRepAndIdx />
