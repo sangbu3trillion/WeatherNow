@@ -48,7 +48,7 @@ export default function SideBar() {
                 </div>
                 <div
                     id="sidebar"
-                    className="w-20 ml-3 duration-200 bg-gray-200 left-36 mt rounded-xl drop-shadow-xl opacity-60 hover:w-72"
+                    className="w-20 ml-3 duration-200 bg-stone-500 left-36 mt rounded-xl drop-shadow-xl opacity-60 hover:w-72"
                 >
                     <nav role="navigation" className="pt-8 pl-4 mt-4 mb-4 ">
                         <div className="relative mt-5 mb-5 overflow-hidden">

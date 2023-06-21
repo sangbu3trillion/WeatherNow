@@ -5,6 +5,7 @@ import Superbad from '../imgs/superbad.jpg';
 import Normal from '../imgs/normal.jpg';
 import Pregood from '../imgs/pregood.jpg';
 import Good from '../imgs/good.jpg';
+import LoadingImg from '../imgs/icons8-눈-폭풍.gif';
 
 const city_list = [
     {부산: 2600000000},
@@ -168,7 +169,7 @@ const WeatherRepAndIdx = () => {
     //cur_time, cityCode값이 존재하면 fetchUv, fetchAir 불러오는 방식 END
 
     return (
-        <div className="border-solid border-2 rounded-xl w-80 h-53 shadow-lg p-10 text-center">
+        <div className="border-solid border-2 rounded-xl w-80 h-53 shadow-lg p-10 text-center bg-white opacity-85">
             <div className="font-gb font-bold text-xl mt-3.5 mb-3.5">현재 생활·보건 지수 </div>
             <div className="flex justify-evenly justify-items-center items-center">
                 <div className="mb-3.5">
@@ -176,7 +177,7 @@ const WeatherRepAndIdx = () => {
                         uv.h0 >= 11 ? (
                             <>
                                 <div className="flex flex-col my-auto items-center">
-                                    <img className="object-contain w-20 h-20" src={Superbad} />
+                                    <img className="object-contain w-20 h-20  " src={Superbad} />
                                 </div>
                                 <div className="text-sm text-red-600 mt-1 mb-2">위험</div>
                                 <div className="font-gb text-base font-bold">자외선지수</div>
@@ -210,12 +211,14 @@ const WeatherRepAndIdx = () => {
                                 <div className="flex flex-col my-auto items-center">
                                     <img className="object-contain w-20 h-20 " src={Good} />
                                 </div>
-                                <div className="text-sm text-blue-400 mt-1 mb-2">낮음</div>
+                                <div className="text-sm text-blue-400 mt-1 mb-2 ">낮음</div>
                                 <div className="font-gb text-base font-bold">자외선지수</div>
                             </>
                         )
                     ) : (
-                        <div>Loading weather data...</div>
+                        <div>
+                            <img className="object-contain w-20 h-20 " src={LoadingImg} />
+                        </div>
                     )}
                 </div>
 
@@ -255,7 +258,9 @@ const WeatherRepAndIdx = () => {
                             </>
                         ) : null
                     ) : (
-                        <div>Loading weather data...</div>
+                        <div>
+                            <img className="object-contain w-20 h-20 " src={LoadingImg} />
+                        </div>
                     )}
                 </div>
             </div>

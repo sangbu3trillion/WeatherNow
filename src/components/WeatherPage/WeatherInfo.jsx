@@ -7,6 +7,7 @@ import Sunny from '../imgs/sunny.gif';
 import Cloud from '../imgs/cloudy.gif';
 import Cloud_many from '../imgs/blur.gif';
 import Marker from '../imgs/icon_location.6b6e7537b41fdb92eb9a.gif';
+import LoadingImg from '../imgs/icons8-눈-폭풍.gif';
 
 const WeatherInfo = () => {
     const [lng, setLng] = useState(null);
@@ -164,12 +165,14 @@ const WeatherInfo = () => {
     console.log('------ultra', weather_ultra_cur_reh);
 
     return (
-        <div className="border-solid border-2 rounded-xl w-80 h-55 shadow-lg p-7">
+        <div className="border-solid border-2 rounded-xl w-80 h-55 shadow-lg p-7 bg-white opacity-85">
             <div className="current_temp_and_img flex">
                 {weather_ultra_cur_temp ? (
                     <div className="font-gb font-bold text-4xl">{weather_ultra_cur_temp[0].fcstValue}°</div>
                 ) : (
-                    <div>Loading weather data...</div>
+                    <div>
+                        <img className="object-contain w-20 h-20 " src={LoadingImg} />
+                    </div>
                 )}
                 {weather_ultra_cur_sky ? (
                     <div className="ml-1 ">
@@ -182,7 +185,9 @@ const WeatherInfo = () => {
                         )}
                     </div>
                 ) : (
-                    <div>Loading weather data...</div>
+                    <div>
+                        <img className="object-contain w-20 h-20 " src={LoadingImg} />
+                    </div>
                 )}
             </div>
             <div className="mb-3">
@@ -197,7 +202,9 @@ const WeatherInfo = () => {
                         <p>No temperature data available.</p>
                     )
                 ) : (
-                    <p>Loading weather data...</p>
+                    <div>
+                        <img className="object-contain w-20 h-20 " src={LoadingImg} />
+                    </div>
                 )}
             </div>
             <div className="mb-3 flex">
