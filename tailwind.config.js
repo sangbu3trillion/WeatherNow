@@ -6,6 +6,7 @@ module.exports = {
             fontFamily: {
                 jua: ["'Jua', sans-serif"],
                 gb: ["'Gowun Batang', serif;"],
+                suit: ["'SUIT', sans-serif;"],
             },
         },
     },

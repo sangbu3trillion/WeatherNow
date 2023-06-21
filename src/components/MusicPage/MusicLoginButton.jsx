@@ -9,10 +9,10 @@ export default function MusicLoginButton({token, onClickLogout}) {
     if (!token) {
         return (
             <a className="text-gray-400" href={loginEndpoint}>
-                <span className="text-black hover:text-blue-300 text-xl leading-5">
+                <span className="text-black hover:text-blue-300 text-2xl leading-5">
                     <i className="fa-brands fa-spotify"></i>
                     &nbsp;
-                    <span>Login to Spotify</span>
+                    <span>login</span>
                 </span>
                 <span
                     className="ml-1 far fa-circle-question absolute leading-loose "
@@ -33,10 +33,10 @@ export default function MusicLoginButton({token, onClickLogout}) {
         );
     } else {
         return (
-            <button onClick={onClickLogout} className="hover:text-blue-300 text-xl">
+            <button onClick={onClickLogout} className="hover:text-blue-300 text-2xl ">
                 <i className="fas fa-right-from-bracket"></i>
                 &nbsp;
-                <span className="font-gb"> Logout</span>
+                <span className="font-suit"> logout</span>
             </button>
         );
     }
