@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import axios from 'axios';
 import './css/search.css';
+// import Loading from '../Utils/Loading';
 import {useFetchFoodQuery, useFetchWeatherQuery} from '../../store';
 import {useEffect} from 'react';
 import BasetimeCalc from '../Utils/BasetimeCalc';
@@ -89,6 +90,7 @@ export default function MusicSearchForm({token, onSearch}) {
         y === null
     ) {
         return <div>로딩중입니다</div>;
+        // return <Loading />;
     } else if (weatherData.error || foodData.error) {
         return <div>에러가 발생했습니다</div>;
     } else if (!weatherData.data || !foodData.data) {
@@ -111,14 +113,17 @@ export default function MusicSearchForm({token, onSearch}) {
         <div className="start-screen">
             <ul>
                 <li>
-                    <h1>오늘 날씨에 맞는 노래를 추천해드릴게요</h1>
+                    <h1 className="font-gb">오늘 날씨에 맞는 노래를 추천해드릴게요</h1>
                 </li>
                 <li>
                     <form onSubmit={searchMusic} className="mt-6">
-                        <input type="text" onChange={e => setSearchKey(e.target.value)} />
-                        <button className="p-4 bg-sky-200 rounded-2xl" type={'submit'}>
-                            Search
-                        </button>
+                        {/* <input type="text" onChange={e => setSearchKey(e.target.value)} /> */}
+                        <p className="rounded-full">
+                            <button
+                                className="p-14 bg-sky-200/70 rounded-full text-5xl text-center font-bold hover:bg-sky-300/50 fas fa-music text-white"
+                                type={'submit'}
+                            ></button>
+                        </p>
                     </form>
                 </li>
             </ul>

@@ -139,9 +139,9 @@ const FoodMap = () => {
     console.log(info, 'info');
 
     return (
-        <div className="h-screen">
-            <div className="w-4/6 m-auto mt-14">
-                <p className="mb-10 text-5xl font-bold font-gb ">Today Place</p>
+        <div className="w-full h-screen font-suit mt-[158px]">
+            <div className="m-auto mt-14">
+                <p className="m-auto mt-14 text-left mb-10 text-5xl font-bold">Today Place</p>
             </div>
             <div>
                 <Map
@@ -155,8 +155,8 @@ const FoodMap = () => {
                             key={`${position.title}-${position.latlng}`}
                             position={position.latlng}
                             image={{
-                                src: `${process.env.PUBLIC_URL}/ci.png`,
-                                size: {width: 35, height: 45},
+                                src: `${process.env.PUBLIC_URL}/mapmarker.png`,
+                                size: {width: 45, height: 45},
                             }}
                             title={position.title}
                             onClick={() => handleMarkerClick(position)}

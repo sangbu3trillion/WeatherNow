@@ -42,13 +42,21 @@ export default function SideBar() {
             {/* sidebar navigation */}
             <div id="sidebar-section">
                 <div className="flex gap-5 ml-2 w-44">
-                    <button onClick={logoBtnClickHandler} className="mb-5 text-3xl font-bold font-gb">
-                        <Link to="/"> 웨더나우</Link>
+                    <button
+                        onClick={logoBtnClickHandler}
+                        className="mb-5 text-[37px] font-bold font-suit leading-[0.1em]"
+                    >
+                        <Link to="/">
+                            {' '}
+                            <span className="leading text-neutral-600">weather</span>
+                            <br />
+                            <span className="text-7xl text-neutral-700">now</span>
+                        </Link>
                     </button>
                 </div>
                 <div
                     id="sidebar"
-                    className="w-20 ml-3 duration-200 bg-stone-500 left-36 mt rounded-xl drop-shadow-xl opacity-60 hover:w-72"
+                    className="w-20 ml-2 duration-200 bg-stone-500 left-36 mt-10 rounded-xl drop-shadow-xl opacity-60 hover:w-72"
                 >
                     <nav role="navigation" className="pt-8 pl-4 mt-4 mb-4 ">
                         <div className="relative mt-5 mb-5 overflow-hidden">
@@ -64,9 +72,9 @@ export default function SideBar() {
                                     <button
                                         onClick={sideBtnClickHandler}
                                         name={WEATHER_p}
-                                        className="text-2xl font-bold font-gb"
+                                        className="text-2xl font-bold font-suit"
                                     >
-                                        <Link to="/"> 날씨</Link>
+                                        <Link to="/"> weather</Link>
                                     </button>
                                 </li>
                                 <li className="flex gap-5 p-2 text-xl text-white cursor-pointer nav-item rounded-l-xl my-7 hover:text-gray-400">
@@ -74,16 +82,16 @@ export default function SideBar() {
                                         <button
                                             onClick={sideBtnClickHandler}
                                             name={STYLE_i}
-                                            className="fas fa-user fa-2x"
+                                            className="fas fa-spoon fa-2x"
                                         ></button>
                                     </Link>
 
                                     <button
                                         onClick={sideBtnClickHandler}
                                         name={STYLE_p}
-                                        className="text-2xl font-bold font-gb"
+                                        className="text-2xl font-bold font-suit"
                                     >
-                                        <Link to="/food"> 맛집</Link>
+                                        <Link to="/food"> food</Link>
                                     </button>
                                 </li>
                                 <li className="flex gap-5 p-2 text-xl text-white cursor-pointer nav-item rounded-l-xl my-7 hover:text-gray-400">
@@ -97,9 +105,9 @@ export default function SideBar() {
                                     <button
                                         onClick={sideBtnClickHandler}
                                         name={MUSIC_p}
-                                        className="text-2xl font-bold font-gb"
+                                        className="text-2xl font-bold font-suit"
                                     >
-                                        <Link to="/music">음악</Link>
+                                        <Link to="/music"> music</Link>
                                     </button>
                                 </li>
                             </ul>

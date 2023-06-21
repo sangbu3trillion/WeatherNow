@@ -44,15 +44,15 @@ export default function Music() {
     };
 
     return (
-        <div className="font-gb my-0 mx-auto w-6/12">
+        <div className="my-0 -ml-16 w-full h-screen mt-[158px]">
             <div>
-                <p className="font-bold text-5xl my-10 text-center">Today Music</p>
+                <p className="font-bold text-5xl my-10 text-left">Today Music</p>
             </div>
             <div className="mb-7 mt-14">
                 <MusicLoginButton token={token} onClickLogout={logout} />
             </div>
             <MusicSearchForm token={token} onSearch={searchMusic} />
-            <div>
+            <div className="h-full">
                 <script src="https://sdk.scdn.co/spotify-player.js"></script>
                 <ul className="grid place-items-center">{renderMusic()}</ul>
             </div>
