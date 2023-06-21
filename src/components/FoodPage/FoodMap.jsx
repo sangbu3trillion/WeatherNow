@@ -137,7 +137,7 @@ const FoodMap = () => {
     console.log(info, 'info');
 
     return (
-        <div>
+        <div className="h-screen">
             <div className="w-4/6 m-auto mt-14">
                 <p className="mb-10 text-5xl font-bold font-gb ">Today Place</p>
             </div>
