@@ -7,6 +7,8 @@ import MusicTrackItem from './MusicTrackItem';
 export default function Music() {
     const [playlist, setPlaylist] = useState([]);
     const [token, setToken] = useState('');
+    // const [getList, setGetList] = useState([]);
+    // const [player, setPlayer] = useState(null);
 
     //token
     useEffect(() => {

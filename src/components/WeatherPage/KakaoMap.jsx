@@ -26,11 +26,11 @@ function KakaoMap() {
     }, []);
 
     return (
-        <div className="flex justify-center w-11/12 mx-auto my-5 space-x-32">
+        <div>
             {x && y && (
                 <Map
                     center={{lat: x, lng: y}}
-                    style={{width: '200px', height: '200px'}}
+                    style={{width: '300px', height: '292px'}}
                     level={3}
                     className="rounded-lg shadow-xl" //bodr radius
                 >

@@ -1,9 +1,8 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
-import {dfs_xy_conv} from '../../components/Utils/XYtranselate';
 
 const foodApi = createApi({
     reducerPath: 'food',
-    keepUnusedDataFor: 600,
+    keepUnusedDataFor: 500,
     baseQuery: fetchBaseQuery({
         baseUrl: 'http://localhost:3000',
     }),

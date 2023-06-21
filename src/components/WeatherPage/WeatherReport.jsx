@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, {useEffect, useState} from 'react';
+import Test from '../imgs/로고-removebg-preview.png';
 
 //강원도: 105, (서울, 인천, 경기도) : 109, 충북: 131, (대전, 세종, 충남) : 133, (대구, 경북) : 143 , (광주, 전남) : 156, 제주도: 184, (부산,울산,경남) : 159
 const city_list = [
@@ -59,8 +60,8 @@ const WeatherReport = () => {
                 headers: {Authorization: `KakaoAK 8a2e72241a0c6bdd460d4e3ba175136b`},
             })
             .then(city => {
-                console.log('---- 전체값', city);
-                console.log('---- 도시명', city.data.documents[0].address.region_1depth_name);
+                console.log('---- 기상특보', city);
+                console.log('---- 기상특보도시', city.data.documents[0].address.region_1depth_name);
                 setCity(city.data.documents[0].address.region_1depth_name);
             })
             .catch(e => {
@@ -130,9 +131,10 @@ const WeatherReport = () => {
         }
     }, [cityCode, cur_time]);
     //cityCode, time값이 존재하면 fetchReport 불러오는 방식 END
+    console.log('report-----', report);
 
     return (
-        <div className="border-solid border-2 rounded-xl w-3/5 shadow-lg p-6">
+        <div className="border-solid border-2 rounded-xl shadow-lg p-6 bg-white opacity-85">
             <div className="mb-3">
                 <div className="font-gb font-bold text-xl text-center mb-2 ">기상특보 현황</div>
                 {report ? (
@@ -157,7 +159,12 @@ const WeatherReport = () => {
                         </div>
                     </>
                 ) : (
-                    <div>Loading weather Report data...</div>
+                    <div className="mb-4">
+                        <span className="border-solid border-2 rounded-lg p-2 mr-2 bg-red-500 text-slate-50">
+                            특보없음
+                        </span>
+                        <span>현재 특보 지역은 없습니다</span>
+                    </div>
                 )}
             </div>
         </div>

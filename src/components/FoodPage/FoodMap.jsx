@@ -1,14 +1,11 @@
-import axios from 'axios';
 import React, {useEffect, useRef, useState} from 'react';
 import {Map, MapMarker} from 'react-kakao-maps-sdk';
 import FoodContents from './FoodContents';
-import TypingTest from './TypingTest';
 
 import {useFetchWeatherQuery, useFetchFoodQuery} from '../../store';
 import BasetimeCalc from '../Utils/BasetimeCalc';
 import {CheckWeather} from '../Utils/CheckWeather';
 import {FoodList} from '../Utils/FoodList';
-import FoodContents from './FoodContents';
 console.log(FoodList, 'FoodList');
 
 const FoodMap = () => {
@@ -68,47 +65,6 @@ const FoodMap = () => {
         navigator.geolocation.getCurrentPosition(success, error);
     }
 
-    // const fetchUsers = async () => {
-    //     setUsers(null);
-
-    //     try {
-    //         const response = await axios.get(
-    //             'http://apis.data.go.kr/6260000/FoodService/getFoodKr?serviceKey=GSRcCYZGeievH8r6AdKyjzKx5dDFhx9Uyh9X9ieoqWEwe1alFjjcRtG5KiLxH7Ur313ypnBOPtpPD%2FR9m2hn0A%3D%3D&numOfRows=100&pageNo=1&resultType=json',
-    //         );
-
-    //         setUsers(response.data);
-
-    //         let test = response.data.getFoodKr.item.filter(e => e.RPRSNTV_MENU.includes('수육'));
-    //         let test2 = response.data.getFoodKr.item.filter(e => e.RPRSNTV_MENU.includes(FoodList[0][ret][1]));
-    //         let test3 = response.data.getFoodKr.item.filter(e => e.RPRSNTV_MENU.includes(FoodList[0][ret][2]));
-
-    //         console.log(test3, 'test3');
-    //         test = test.concat(test2);
-    //         test = test.concat(test3);
-    //         console.log(test, 'test');
-
-    //         const newPositions = test.map(item => ({
-    //             title: item.MAIN_TITLE,
-    //             latlng: {lat: item.LAT, lng: item.LNG},
-    //         }));
-
-    //         setPositions(newPositions);
-
-    //         const foodList = test.map(items => ({
-    //             picture: items.MAIN_IMG_THUMB,
-    //             title: items.MAIN_TITLE,
-    //             addr: items.ADDR1,
-    //             tel: items.CNTCT_TEL,
-    //             time: items.USAGE_DAY_WEEK_AND_TIME,
-    //             menu: items.RPRSNTV_MENU,
-    //             detail: items.ITEMCNTNTS,
-    //         }));
-    //         setInfo(foodList);
-    //     } catch (e) {
-    //         console.log(e);
-    //     }
-    // };
-
     useEffect(() => {
         init();
         // fetchUsers();
@@ -133,6 +89,8 @@ const FoodMap = () => {
         return <div>로딩중..</div>;
     }
     if (weatherData.error || foodData.error) {
+        weatherData.refetch();
+        foodData.refetch();
         return <div>에러가 발생했습니다</div>;
     }
     if (!weatherData.data || !foodData.data) {
@@ -177,8 +135,9 @@ const FoodMap = () => {
 
     console.log(newPositions, 'newPositions');
     console.log(info, 'info');
+
     return (
-        <div>
+        <div className="h-screen">
             <div className="w-4/6 m-auto mt-14">
                 <p className="mb-10 text-5xl font-bold font-gb ">Today Place</p>
             </div>
