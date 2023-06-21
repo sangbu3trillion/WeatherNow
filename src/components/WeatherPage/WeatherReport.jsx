@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React, {useEffect, useState} from 'react';
-import Test from '../imgs/로고-removebg-preview.png';
 
 //강원도: 105, (서울, 인천, 경기도) : 109, 충북: 131, (대전, 세종, 충남) : 133, (대구, 경북) : 143 , (광주, 전남) : 156, 제주도: 184, (부산,울산,경남) : 159
 const city_list = [

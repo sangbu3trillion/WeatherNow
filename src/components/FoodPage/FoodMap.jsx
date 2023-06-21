@@ -112,11 +112,26 @@ const FoodMap = () => {
     console.log(ret, 'ret');
 
     let test = foodData.data.getFoodKr.item.filter(e => e.RPRSNTV_MENU.includes(FoodList[0][ret][0]));
-    let test2 = foodData.data.getFoodKr.item.filter(e => e.RPRSNTV_MENU.includes(FoodList[0][ret][1]));
-    let test3 = foodData.data.getFoodKr.item.filter(e => e.RPRSNTV_MENU.includes(FoodList[0][ret][2]));
+    let test2 = foodData.data.getFoodKr.item.filter(e => e.RPRSNTV_MENU.includes(FoodList[0][ret][3]));
+    let test3 = foodData.data.getFoodKr.item.filter(e => e.RPRSNTV_MENU.includes(FoodList[0][ret][8]));
+    let test4 = foodData.data.getFoodKr.item.filter(e => e.RPRSNTV_MENU.includes(FoodList[0][ret][12]));
+    let test5 = foodData.data.getFoodKr.item.filter(e => e.RPRSNTV_MENU.includes(FoodList[0][ret][34]));
+    let test6 = foodData.data.getFoodKr.item.filter(e => e.RPRSNTV_MENU.includes(FoodList[0][ret][45]));
+    let test7 = foodData.data.getFoodKr.item.filter(e => e.RPRSNTV_MENU.includes(FoodList[0][ret][65]));
+    let test8 = foodData.data.getFoodKr.item.filter(e => e.RPRSNTV_MENU.includes(FoodList[0][ret][88]));
+
     test = test.concat(test2);
     test = test.concat(test3);
+    test = test.concat(test4);
+    test = test.concat(test5);
+    test = test.concat(test6);
+    test = test.concat(test7);
+    test = test.concat(test8);
 
+    // test = new Set(test);
+    // test = Array.from(test);
+    console.log(test, 'test hi');
+    console.log(FoodList[0][ret].length, 'test2 hi');
     const info = test.map(items => ({
         picture: items.MAIN_IMG_THUMB,
         title: items.MAIN_TITLE,
@@ -126,9 +141,6 @@ const FoodMap = () => {
         menu: items.RPRSNTV_MENU,
         detail: items.ITEMCNTNTS,
     }));
-    console.log(test2, 'test2');
-    console.log(test3, 'test3');
-    console.log(test, 'test');
 
     const newPositions = test.map(item => ({
         title: item.MAIN_TITLE,
