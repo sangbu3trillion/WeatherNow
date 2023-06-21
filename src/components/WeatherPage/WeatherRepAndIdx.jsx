@@ -169,8 +169,8 @@ const WeatherRepAndIdx = () => {
     //cur_time, cityCode값이 존재하면 fetchUv, fetchAir 불러오는 방식 END
 
     return (
-        <div className="rounded-xl w-80 h-53 shadow-lg p-10 text-center bg-white opacity-85">
-            <div className="font-gb font-bold text-xl mt-3.5 mb-3.5">현재 생활·보건 지수 </div>
+        <div className="rounded-xl w-80 h-53 shadow-lg p-8 text-center bg-white opacity-85">
+            <div className="font-gb font-bold text-3xl mt-2.5 mb-8">현재 생활·보건 지수 </div>
             <div className="flex justify-evenly justify-items-center items-center">
                 <div className="mb-3.5">
                     {uv ? (
@@ -179,7 +179,7 @@ const WeatherRepAndIdx = () => {
                                 <div className="flex flex-col my-auto items-center">
                                     <img className="object-contain w-20 h-20  " src={Superbad} />
                                 </div>
-                                <div className="text-sm text-red-600 mt-1 mb-2">위험</div>
+                                <div className="text-base text-red-600 mt-1 mb-2">위험</div>
                                 <div className="font-suit text-base font-bold">자외선지수</div>
                             </>
                         ) : uv.h0 >= 8 ? (
@@ -187,7 +187,7 @@ const WeatherRepAndIdx = () => {
                                 <div className="flex flex-col my-auto items-center">
                                     <img className="object-contain w-20 h-20 " src={Bad} />
                                 </div>
-                                <div className="text-sm text-red-400 mt-1 mb-2">매우높음</div>
+                                <div className="text-base text-red-400 mt-1 mb-2">매우높음</div>
                                 <div className="font-suit text-base font-bold">자외선지수</div>
                             </>
                         ) : uv.h0 >= 6 ? (
@@ -195,7 +195,7 @@ const WeatherRepAndIdx = () => {
                                 <div className="flex flex-col my-auto items-center">
                                     <img className="object-contain w-20 h-20 " src={Normal} />
                                 </div>
-                                <div className="text-sm text-orange-400 mt-1 mb-2">높음</div>
+                                <div className="text-base text-orange-400 mt-1 mb-2">높음</div>
                                 <div className="font-suit text-base font-bold">자외선지수</div>
                             </>
                         ) : uv.h0 >= 3 ? (
@@ -203,7 +203,7 @@ const WeatherRepAndIdx = () => {
                                 <div className="flex flex-col my-auto items-center">
                                     <img className="object-contain w-20 h-20 " src={Pregood} />
                                 </div>
-                                <div className="text-sm text-green-500 mt-1 mb-2">보통</div>
+                                <div className="text-base text-green-500 mt-1 mb-2">보통</div>
                                 <div className="font-suit text-base font-bold">자외선지수</div>
                             </>
                         ) : (
@@ -211,13 +211,13 @@ const WeatherRepAndIdx = () => {
                                 <div className="flex flex-col my-auto items-center">
                                     <img className="object-contain w-20 h-20 " src={Good} />
                                 </div>
-                                <div className="text-sm text-blue-400 mt-1 mb-2 ">낮음</div>
-                                <div className="font-suit text-base font-bold">자외선지수</div>
+                                <div className="text-base text-blue-400 mt-1 mb-2 ">낮음</div>
+                                <div className="font-suit text-lg font-bold">자외선지수</div>
                             </>
                         )
                     ) : (
                         <div>
-                            <img className="object-contain w-20 h-20 " src={LoadingImg} />
+                            <img className="object-contain w-20 h-20 " src={`${process.env.PUBLIC_URL}/spinner.gif`} />
                         </div>
                     )}
                 </div>
@@ -229,15 +229,15 @@ const WeatherRepAndIdx = () => {
                                 <div className="flex flex-col my-auto items-center">
                                     <img className="object-contain w-20 h-20 " src={Good} />
                                 </div>
-                                <div className="text-sm text-blue-400 mt-1 mb-2">낮음</div>
-                                <div className="font-suit text-base font-bold">대기정체지수</div>
+                                <div className="text-base text-blue-400 mt-1 mb-2">낮음</div>
+                                <div className="font-suit text-lg font-bold">대기정체지수</div>
                             </>
                         ) : air.h3 <= 75 ? (
                             <>
                                 <div className="flex flex-col my-auto items-center">
                                     <img className="object-contain w-20 h-20 " src={Pregood} />
                                 </div>
-                                <div className="text-sm text-green-500 mt-1 mb-2">보통</div>
+                                <div className="text-base text-green-500 mt-1 mb-2">보통</div>
                                 <div className="font-suit text-base font-bold">대기정체지수</div>
                             </>
                         ) : air.h3 <= 50 ? (
@@ -245,7 +245,7 @@ const WeatherRepAndIdx = () => {
                                 <div className="flex flex-col my-auto items-center">
                                     <img className="object-contain w-20 h-20 " src={Normal} />
                                 </div>
-                                <div className="text-sm text-orange-400 mt-1 mb-2">높음</div>
+                                <div className="text-base text-orange-400 mt-1 mb-2">높음</div>
                                 <div className="font-suit text-base font-bold">대기정체지수</div>
                             </>
                         ) : air.h3 <= 25 ? (
@@ -253,13 +253,13 @@ const WeatherRepAndIdx = () => {
                                 <div className="flex flex-col my-auto items-center">
                                     <img className="object-contain w-20 h-20 " src={Bad} />
                                 </div>
-                                <div className="text-sm text-red-400 mt-1 mb-2">매우높음</div>
+                                <div className="text-base text-red-400 mt-1 mb-2">매우높음</div>
                                 <div className="font-suit text-base font-bold">대기정체지수</div>
                             </>
                         ) : null
                     ) : (
                         <div>
-                            <img className="object-contain w-20 h-20 " src={LoadingImg} />
+                            <img className="object-contain w-20 h-20 " src={`${process.env.PUBLIC_URL}/spinner.gif`} />
                         </div>
                     )}
                 </div>

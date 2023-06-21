@@ -55,7 +55,7 @@ const WeatherRadar = () => {
 
     return (
         <div>
-            <span className="mr-2 text-2xl font-bold font-gb ">레이더 영상</span>
+            <span className="mr-2 text-2xl font-bold font-gb">레이더 영상</span>
             <span className="font-gb text-slate-400 text-sm  ">
                 {' '}
                 |{' '}
@@ -64,14 +64,18 @@ const WeatherRadar = () => {
                     : time.getHours() - 1 + ':00'}{' '}
                 기준
             </span>
-            <div className="p-2 border-2 border-solid shadow-md rounded-xl h-96 bg-white opacity-85">
-                <img
-                    // className="border-solid border-2 rounded-xl shadow-lg p-3 mt-1"
-                    src={radar}
-                    alt="레이더 영상"
-                    width="375"
-                    height="390"
-                />
+            <div className="p-2 border-2 border-solid shadow-md rounded-xl h-96 bg-white opacity-85 mt-1">
+                {radar ? (
+                    <img
+                        // className="border-solid border-2 rounded-xl shadow-lg p-3 mt-1"
+                        src={radar}
+                        alt="레이더 영상"
+                        width="375"
+                        height="390"
+                    />
+                ) : (
+                    <img src={`${process.env.PUBLIC_URL}/spinner.gif`} />
+                )}
             </div>
         </div>
     );

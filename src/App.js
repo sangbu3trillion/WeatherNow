@@ -101,7 +101,11 @@ function App() {
     }, [weatherData.data, baseTime]);
 
     if (weatherData.isFetching || baseTime === null || baseDate === null || x === null || y === null) {
-        return <div>로딩중..</div>;
+        return (
+            <div className="w-screen h-screen flex justify-center items-center">
+                <img src={`${process.env.PUBLIC_URL}/spinner.gif`} />
+            </div>
+        );
     }
 
     return (
