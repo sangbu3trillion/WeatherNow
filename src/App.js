@@ -7,7 +7,7 @@ import BasetimeCalc from './components/Utils/BasetimeCalc';
 import React, {useEffect, useRef, useState} from 'react';
 import {useFetchWeatherQuery} from './store';
 import {CheckWeather} from './components/Utils/CheckWeather';
-
+import {CgMail} from 'react-icons/cg';
 function App() {
     const [x, setX] = useState(null);
     const [y, setY] = useState(null);
@@ -110,7 +110,7 @@ function App() {
 
     return (
         <div>
-            <div className="relative flex">
+            <div className="relative flex ">
                 <div
                     className="absolute inset-0 bg-no-repeat opacity-25 z-[-1] align-bottom m-0 p-0"
                     style={{
@@ -134,10 +134,35 @@ function App() {
                                 <Route path="/music" element={<PlayList />} />
                             </Routes>
                         </div>
+
+                        <div className=" text-left font-suit font-bold mx-auto my-1 text-xl">
+                            <div className="px-48 flex flex-col items-start ">
+                                <p className="mt-0.5 flex justify-center items-center text-gray-500">
+                                    Team Leader: Hyunhui Choi <CgMail className="ml-3 mr-2" /> gusgml042933@gmail.com{' '}
+                                </p>
+                                <p className="mt-0.5 flex justify-center items-center text-gray-500">
+                                    Team Member: Seongsu Yang
+                                    <CgMail className="ml-2  mr-2" /> ysotgood@gmail.com{' '}
+                                </p>
+                                <p className="mt-0.5 flex justify-center items-center text-gray-500">
+                                    Team Member: Hyunuk Jung <CgMail className="ml-3  mr-2" /> hyunuk1459@gmail.com{' '}
+                                </p>
+                                <p className="mt-0.5 flex justify-center items-center text-gray-500">
+                                    Team Member: Seulbi Lee <CgMail className="ml-3  mr-2" /> iolagvi28@gmail.com{' '}
+                                </p>
+                                <p classname="mt-5 ">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <span className="text-gray-500">© 2023 </span>
+                                    <a href="https://www.bespinglobal.com/" classname="hover:underline ">
+                                        <span className="text-gray-500"> Bespinglobal™ </span>
+                                    </a>
+                                    <span className="text-gray-500">. All Rights Reserved.</span>
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </BrowserRouter>
             </div>
-            {/* <div className="bg-white">이야이야오</div> */}
         </div>
     );
 }

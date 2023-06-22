@@ -103,7 +103,7 @@ const WeatherMain = () => {
     });
 
     return (
-        <div className="flex flex-col justify-center w-full my-0 -ml-20 mt-[144px]">
+        <div className="flex flex-col justify-center w-full my-0 -ml-20 mt-[144px] pb-12">
             <div className="flex  justify-between ">
                 <KakaoMap />
                 <WeatherInfo
