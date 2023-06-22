@@ -102,7 +102,7 @@ function App() {
 
     if (weatherData.isFetching || baseTime === null || baseDate === null || x === null || y === null) {
         return (
-            <div className="w-screen h-screen flex justify-center items-center">
+            <div className="flex items-center justify-center w-screen h-screen">
                 <img src={`${process.env.PUBLIC_URL}/spinner.gif`} />
             </div>
         );
@@ -125,11 +125,12 @@ function App() {
                     <div className="w-2/12 h-auto mt-20 ml-48">
                         <SideBar />
                     </div>
-                    <div className="w-10/12  text-neutral-700">
+                    <div className="w-10/12 text-neutral-700">
                         <div className="p-16 max-w-7xl">
                             {/* h-auto  */}
+
                             <Routes>
-                                <Route path="/" element={<WeatherMain />} />
+                                <Route path="/" element={<WeatherMain props={weatherData} hi={'hi'} />} />
                                 <Route path="/food" element={<FoodMap />} />
                                 <Route path="/music" element={<PlayList />} />
                             </Routes>
