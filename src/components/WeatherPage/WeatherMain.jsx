@@ -75,7 +75,9 @@ const WeatherMain = props => {
                 <div className="w-full mt-10"></div>
             </div>
         );
-    if (weatherData.error) return <div>에러발생</div>;
+    if (weatherData.error) {
+        weatherData.refetch();
+    }
     if (!weatherData.data) return <div>데이터 없음</div>;
     weather = weatherData.data.response.body.items.item;
     let t;
