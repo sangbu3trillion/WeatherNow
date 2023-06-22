@@ -12,6 +12,7 @@ export default function DailyList() {
     const [today, setToday] = useState(true); //오늘 날씨
     const [tommorow, setTommorow] = useState(false);
     const [afterTommorow, setAfterTommorow] = useState(false);
+    const [flag, setFlag] = useState(false);
     let temp = new Date();
     let hour = temp.getHours();
 
@@ -26,7 +27,7 @@ export default function DailyList() {
         baseDate,
         baseTime: baseTime + '00',
     });
-
+    // weatherData.data && setFlag(true);
     console.log(weatherData.data, 'data');
     console.log(weatherData.isLoading, 'isLoading');
     console.log(weatherData.error, 'error');

@@ -36,39 +36,6 @@ export const CheckWeather = (weather, weatherTime, flag, weatherDate) => {
                 if ((e.category === 'SKY' && e.fcstValue === '3') || e.fcstValue === '4') skyValue = 'cloud';
             }
         });
-
-        // weather.map(e => {
-        //     if (e.fcstTime === weatherTime && e.category === 'SKY' && e.fcstValue === '1') {
-        //         skyValue = 'sunny';
-        //     }
-        //     if (e.fcstTime === weatherTime && e.category === 'SKY' && e.fcstValue === '3') {
-        //         skyValue = 'cloudy';
-        //     }
-        //     if (e.fcstTime === weatherTime && e.category === 'SKY' && e.fcstValue === '4') {
-        //         skyValue = 'blur';
-        //     }
-        //     if (
-        //         e.fcstTime === weatherTime &&
-        //         e.category === 'PTY' &&
-        //         (e.fcstValue === '1' || e.fcstValue === '2' || e.fcstValue === '5')
-        //     ) {
-        //         skyValue = 'rainny';
-        //     }
-        // });
-
-        // console.log(skyValue, 'skyValue');
-        // if (skyValue === '1') {
-        //     console.log('sunny');
-        //     skyValue = 'sunny';
-        // }
-        // if (skyValue === '3') {
-        //     console.log('cloud');
-        //     skyValue = 'cloudy';
-        // }
-        // if (skyValue === '4') {
-        //     console.log('blur');
-        //     skyValue = 'blur';
-        // }
     }
 
     return skyValue;

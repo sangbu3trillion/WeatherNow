@@ -77,31 +77,6 @@ const WeatherInfo = ({weather, skyValue, t, maxTemp, minTemp, reh}) => {
                 <div className="ml-1 ">
                     <img className="object-contain h-8 w-14" src={`resource/${skyValue}.gif`} />
                 </div>
-        <div className=" rounded-xl w-80 h-55 shadow-lg p-7 bg-white opacity-85">
-            {/* border-solid border-2 */}
-            <div className="current_temp_and_img flex">
-                {weather_ultra_cur_temp ? (
-                    <div className="font-gb font-bold text-4xl">{weather_ultra_cur_temp[0].fcstValue}°</div>
-                ) : (
-                    <div>
-                        <img className="object-contain w-20 h-20 " src={LoadingImg} />
-                    </div>
-                )}
-                {weather_ultra_cur_sky ? (
-                    <div className="ml-1 ">
-                        {weather_ultra_cur_sky[0].fcstValue === '1' ? (
-                            <img className="object-contain w-14 h-8" src={Sunny} />
-                        ) : weather_ultra_cur_sky[0].fcstValue === '3' ? (
-                            <img className="object-contain w-14 h-8" src={Cloud} />
-                        ) : (
-                            <img className="object-contain w-14 h-8" src={Cloud_many} />
-                        )}
-                    </div>
-                ) : (
-                    <div>
-                        <img className="object-contain w-20 h-20 " src={LoadingImg} />
-                    </div>
-                )}
             </div>
 
             <div className="mb-3">

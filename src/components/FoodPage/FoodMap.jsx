@@ -88,7 +88,20 @@ const FoodMap = () => {
         x === null ||
         y === null
     ) {
-        return <div>로딩중..</div>;
+        return (
+            <div className="w-full h-screen font-suit mt-[144px]">
+                <div className="m-auto mt-14">
+                    <p className="m-auto mb-10 text-5xl font-bold text-left mt-14">Today Place</p>
+                </div>
+                <div>
+                    <img src={`${process.env.PUBLIC_URL}/spinner.gif`} />
+                </div>
+
+                {activeMarker !== null && <FoodContents info={info} marker={activeMarker} positions={newPositions} />}
+
+                {/* {activeMarker && <FoodContent1 info={info[positions.indexOf(activeMarker)]} />} */}
+            </div>
+        );
     }
     if (weatherData.error || foodData.error) {
         weatherData.refetch();
@@ -111,14 +124,31 @@ const FoodMap = () => {
     let ret = CheckWeather(fwth, '', 2);
     console.log(ret, 'ret');
 
-    let test = foodData.data.getFoodKr.item.filter(e => e.RPRSNTV_MENU.includes(FoodList[0][ret][0]));
-    let test2 = foodData.data.getFoodKr.item.filter(e => e.RPRSNTV_MENU.includes(FoodList[0][ret][3]));
-    let test3 = foodData.data.getFoodKr.item.filter(e => e.RPRSNTV_MENU.includes(FoodList[0][ret][8]));
-    let test4 = foodData.data.getFoodKr.item.filter(e => e.RPRSNTV_MENU.includes(FoodList[0][ret][12]));
-    let test5 = foodData.data.getFoodKr.item.filter(e => e.RPRSNTV_MENU.includes(FoodList[0][ret][34]));
-    let test6 = foodData.data.getFoodKr.item.filter(e => e.RPRSNTV_MENU.includes(FoodList[0][ret][45]));
-    let test7 = foodData.data.getFoodKr.item.filter(e => e.RPRSNTV_MENU.includes(FoodList[0][ret][65]));
-    let test8 = foodData.data.getFoodKr.item.filter(e => e.RPRSNTV_MENU.includes(FoodList[0][ret][88]));
+    let test = foodData.data.getFoodKr.item.filter(e =>
+        e.RPRSNTV_MENU.includes(FoodList[0][ret][baseDate[baseDate.length - 1] * 1]),
+    );
+
+    let test2 = foodData.data.getFoodKr.item.filter(e =>
+        e.RPRSNTV_MENU.includes(FoodList[0][ret][baseDate[baseDate.length - 1] * 1 + 1]),
+    );
+    let test3 = foodData.data.getFoodKr.item.filter(e =>
+        e.RPRSNTV_MENU.includes(FoodList[0][ret][baseDate[baseDate.length - 1] * 1 + 2]),
+    );
+    let test4 = foodData.data.getFoodKr.item.filter(e =>
+        e.RPRSNTV_MENU.includes(FoodList[0][ret][baseDate[baseDate.length - 1] * 1 + 3]),
+    );
+    let test5 = foodData.data.getFoodKr.item.filter(e =>
+        e.RPRSNTV_MENU.includes(FoodList[0][ret][baseDate[baseDate.length - 1] * 1 + 4]),
+    );
+    let test6 = foodData.data.getFoodKr.item.filter(e =>
+        e.RPRSNTV_MENU.includes(FoodList[0][ret][baseDate[baseDate.length - 1] * 1 + 5]),
+    );
+    let test7 = foodData.data.getFoodKr.item.filter(e =>
+        e.RPRSNTV_MENU.includes(FoodList[0][ret][baseDate[baseDate.length - 1] * 1 + 6]),
+    );
+    let test8 = foodData.data.getFoodKr.item.filter(e =>
+        e.RPRSNTV_MENU.includes(FoodList[0][ret][baseDate[baseDate.length - 1] * 1 + 7]),
+    );
 
     test = test.concat(test2);
     test = test.concat(test3);
@@ -153,7 +183,7 @@ const FoodMap = () => {
     return (
         <div className="w-full h-screen font-suit mt-[144px]">
             <div className="m-auto mt-14">
-                <p className="m-auto mt-14 text-left mb-10 text-5xl font-bold">Today Place</p>
+                <p className="m-auto mb-10 text-5xl font-bold text-left mt-14">Today Place</p>
             </div>
             <div>
                 <Map

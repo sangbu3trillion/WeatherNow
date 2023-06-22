@@ -5,16 +5,17 @@ import DailyList from './DailyList';
 import WeatherRepAndIdx from './WeatherRepAndIdx';
 import WeatherRadar from './WeatherSatellite';
 import WeatherReport from './WeatherReport';
-import {useFetchWeatherQuery} from '../../store';
+// import {useFetchWeatherQuery} from '../../store';
 import BasetimeCalc from '../Utils/BasetimeCalc';
-const WeatherMain = () => {
+import {useFetchWeatherQuery} from '../../store';
+const WeatherMain = props => {
     const [x, setX] = useState(null);
     const [y, setY] = useState(null);
     const [baseDate, setBaseDate] = useState(null);
     const [baseTime, setBaseTime] = useState(null);
-
     let temp = new Date();
     let hour = temp.getHours();
+    // let weather = props.props.data.response.body.items.item;
     let weather;
     let year = temp.getFullYear();
     let month = temp.getMonth() + 1 < 10 ? '0' + (temp.getMonth() + 1) : temp.getMonth() + 1;
@@ -63,7 +64,17 @@ const WeatherMain = () => {
         x === null ||
         y === null
     )
-        return <div>로딩중...</div>;
+        return (
+            <div className="flex flex-col justify-center w-full my-0 -ml-20 mt-[144px]">
+                <div className="flex justify-between "></div>
+                <div className="flex items-center justify-between mt-10 ">
+                    <div className="flex items-center justify-center w-screen h-screen">
+                        <img src={`${process.env.PUBLIC_URL}/spinner.gif`} />
+                    </div>
+                </div>
+                <div className="w-full mt-10"></div>
+            </div>
+        );
     if (weatherData.error) return <div>에러발생</div>;
     if (!weatherData.data) return <div>데이터 없음</div>;
     weather = weatherData.data.response.body.items.item;
@@ -104,7 +115,7 @@ const WeatherMain = () => {
 
     return (
         <div className="flex flex-col justify-center w-full my-0 -ml-20 mt-[144px]">
-            <div className="flex  justify-between ">
+            <div className="flex justify-between ">
                 <KakaoMap />
                 <WeatherInfo
                     weather={weather}
