@@ -7,6 +7,7 @@ import Sunny from '../imgs/sunny.gif';
 import Cloud from '../imgs/cloudy.gif';
 import Cloud_many from '../imgs/blur.gif';
 import Marker from '../imgs/icon_location.6b6e7537b41fdb92eb9a.gif';
+import Drop from '../imgs/drop.png';
 import LoadingImg from '../imgs/icons8-눈-폭풍.gif';
 
 const WeatherInfo = ({weather, skyValue, t, maxTemp, minTemp, reh}) => {
@@ -70,31 +71,33 @@ const WeatherInfo = ({weather, skyValue, t, maxTemp, minTemp, reh}) => {
     //lng, lat값이 존재하면 fetchCity를 불러오는 방식 END
 
     return (
-        <div className="bg-white border-2 border-solid shadow-lg rounded-xl w-80 h-55 p-7 opacity-85">
-            <div className="flex current_temp_and_img">
-                <div className="text-4xl font-bold font-gb">{t}°</div>
+        <div className="bg-white border-2 border-solid shadow-lg rounded-xl w-80 h-55 p-3 opacity-85">
+            <div className="flex current_temp_and_img ml-1">
+                <div className="text-7xl font-bold font-gb mb-2">{t}°</div>
 
                 <div className="ml-1 ">
-                    <img className="object-contain h-8 w-14" src={`resource/${skyValue}.gif`} />
+                    <img className="object-contain h-15 w-14 ml-2" src={`resource/${skyValue}.gif`} />
                 </div>
             </div>
 
-            <div className="mb-3">
-                <p className="font-bold text-red-400 font-gb">
-                    {minTemp}°/&nbsp;
-                    {maxTemp}°
-                </p>
+            <div className="mb-3 ml-1">
+                <span className="text-lg font-bold text-indigo-600 font-gb">{minTemp}°</span>
+                <span className=" font-bold text-gray-400 font-gb">/ </span>
+                <span className="text-2xl font-bold text-red-500 font-gb inline-block">{maxTemp}°</span>
+            </div>
+
+            <div className="flex mb-3 ml-1">
+                <div className="text-xl font-gb font-bold mr-1">{city}</div>
+                <div>
+                    <img className="object-contain w-6 h-6" src={Marker} />
+                </div>
             </div>
 
             <div className="flex mb-3">
-                <div className="mr-1">{city}</div>
                 <div>
-                    <img className="object-contain w-5 h-5" src={Marker} />
+                    <img className="object-contain w-7 h-7" src={Drop} />
                 </div>
-            </div>
-
-            <div className="mb-3">
-                <p className="text-sm font-bold font-gb text-cyan-600 ">{reh}%</p>
+                <p className="text-lg font-bold font-gb text-cyan-600 ">{reh}%</p>
             </div>
 
             <div>

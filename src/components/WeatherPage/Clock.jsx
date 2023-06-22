@@ -36,14 +36,14 @@ const Clock = () => {
 
     return (
         <>
-            <div className="border-2 p-5 w-50 rounded-md ">
+            <div className="border-2 p-3 w-50 rounded-md ">
                 <div className="text-center">
-                    <p className="font-suit font-bold">{`${month}/${date}/${days[day]}`} </p>
-                </div>
-                <div className="text-center">
-                    <p className="font-suit">{`${
+                    <span className="font-suit font-bold">{`${month}/${date}/${days[day]}`}</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <span>/ </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span className="font-suit">{`${
                         (hour < 12 ? 'A' : 'P') + 'M' + ' ' + (hour % 12 || 12)
-                    } : ${minute}`}</p>
+                    } : ${minute}`}</span>
                 </div>
             </div>
         </>
